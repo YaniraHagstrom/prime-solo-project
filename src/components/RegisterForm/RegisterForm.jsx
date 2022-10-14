@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // MUI Component Imports:
 import Box from '@mui/material/Box';
@@ -84,6 +85,9 @@ function RegisterForm() {
                 onChange={e => setPassword(e.target.value)} 
               />
               <Button variant="contained" type="submit">Register</Button>
+              <p>Already Have An Account? 
+                <Link to='/login'> Login Here</Link>
+              </p>
           </form>
           </Box>
         </div>

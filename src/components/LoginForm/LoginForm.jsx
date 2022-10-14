@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // MUI Component Imports:
 import Box from '@mui/material/Box';
@@ -77,18 +77,21 @@ function LoginForm() {
               <InputLabel htmlFor="component-simple">Username</InputLabel>
               <Input 
                 id="component-simple" 
-                value={username} 
+            value={username}
                 onChange={e => setUsername(e.target.value)} 
-                />
+          />
               <InputLabel htmlFor="component-simple">Password</InputLabel>
               <Input 
-                type="password"
+            type="password"
                 id="component-simple" 
-                value={password} 
+            value={password}
                 onChange={e => setPassword(e.target.value)} 
-              />
+          />
               <Button variant="contained" type="submit">Login</Button>
-          </form>
+            <p>Don't Have An Account? 
+              <Link to='/registration'> Register Here</Link>
+            </p>
+    </form>
           </Box>
         </div>
       </Paper> 

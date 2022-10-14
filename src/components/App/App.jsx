@@ -17,7 +17,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
+import LoginForm from '../LoginForm/LoginForm';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
@@ -34,7 +34,7 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}
+        <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -64,7 +64,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
-              <LoginPage />
+              <LoginForm />
             }
           </Route>
 
