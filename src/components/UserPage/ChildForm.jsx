@@ -6,6 +6,10 @@ import './userPage.css';
 
 // MUI Component Imports:
 import { InputLabel, FormControl, Select, MenuItem, FormHelperText } from "@mui/material";
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 
 
 
@@ -16,9 +20,12 @@ export default function ChildForm(){
         dispatch({
             type: 'SAGA_FETCH_LANGUAGES'
         })
+        dispatch({
+            type: "SAGA_FETCH_SERVICES"
+        })
     },[])
     const languages = useSelector(store=> store.languages)
-    const [childData, setChildData] = useState({age:'', primaryLanguage_id:'', secondaryLanguage_id:'', services:''});
+    const [childData, setChildData] = useState({age:'', primaryLanguage_id:'', secondaryLanguage_id:'', services:[]});
 
 
     console.log(childData);
@@ -66,6 +73,13 @@ export default function ChildForm(){
                     ))}
                 </Select>
             </FormControl>
+
+            {/* Service Checkboxes */}
+            <div>
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                </FormGroup>
+            </div>
         </> 
     );
 }

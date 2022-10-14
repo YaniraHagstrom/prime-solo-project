@@ -13,7 +13,7 @@ function* fetchLanguages(){
         })
     }
     catch (error) {
-        console.log('Error with user logout:', error);
+        console.log('Error with fetching languages:', error);
     }
 }
 
