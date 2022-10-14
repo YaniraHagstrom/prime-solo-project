@@ -36,7 +36,7 @@ function LoginForm() {
 
   return (
     <Box 
-    sx={{
+      sx={{
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
