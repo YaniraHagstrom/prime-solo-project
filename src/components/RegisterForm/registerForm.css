@@ -1,9 +1,15 @@
 .loginBox {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
 }
 
 .loginForm {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+Button {
+    margin-top: 20px;
+}
+

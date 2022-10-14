@@ -8,6 +8,7 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 
+import './registerForm.css';
 import registerPhoto from './registerPhoto.jpg'
 
 function RegisterForm() {
@@ -29,7 +30,7 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <Box className='loginBox'
+    <Box 
       sx={{
       display: 'flex',
       justifyContent: 'center',
@@ -42,7 +43,7 @@ function RegisterForm() {
     }}
     >
       <Paper elevation={3} >
-        <div >
+        <div className='loginBox'>
           <Box
             className='loginPhoto'
             sx={{
@@ -67,21 +68,23 @@ function RegisterForm() {
           noValidate
           autoComplete="off"
           >
-            <form className="loginForm" onSubmit={registerUser}>
-                <InputLabel htmlFor="component-simple">Username</InputLabel>
-                <Input 
-                  id="component-simple" 
-                  value={username} 
-                  onChange={e => setUsername(e.target)} 
-                  />
-                <InputLabel htmlFor="component-simple">Password</InputLabel>
-                <Input 
-                  id="component-simple" 
-                  value={password} 
-                  onChange={e => setPassword(e.target)} 
+          <form className="loginForm" onSubmit={registerUser}>
+              <InputLabel htmlFor="component-simple">Username</InputLabel>
+              <Input 
+                type="text"
+                id="component-simple" 
+                value={username} 
+                onChange={e => setUsername(e.target.value)} 
                 />
-                <Button variant="contained">Login</Button>
-            </form>
+              <InputLabel htmlFor="component-simple">Password</InputLabel>
+              <Input 
+                type='password'
+                id="component-simple" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+              />
+              <Button variant="contained" type="submit">Register</Button>
+          </form>
           </Box>
         </div>
       </Paper> 
