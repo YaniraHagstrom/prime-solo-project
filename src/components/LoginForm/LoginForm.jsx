@@ -78,15 +78,16 @@ function LoginForm() {
               <Input 
                 id="component-simple" 
                 value={username} 
-                onChange={e => setUsername(e.target)} 
+                onChange={e => setUsername(e.target.value)} 
                 />
               <InputLabel htmlFor="component-simple">Password</InputLabel>
               <Input 
+                type="password"
                 id="component-simple" 
                 value={password} 
-                onChange={e => setPassword(e.target)} 
+                onChange={e => setPassword(e.target.value)} 
               />
-              <Button variant="contained">Login</Button>
+              <Button variant="contained" type="submit">Login</Button>
           </form>
           </Box>
         </div>
