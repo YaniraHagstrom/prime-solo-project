@@ -1,0 +1,15 @@
+.loginBox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+input {
+    width: 75px;
+}
