@@ -1,0 +1,9 @@
+.loginBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.loginForm {
+    display: flex;
+}
