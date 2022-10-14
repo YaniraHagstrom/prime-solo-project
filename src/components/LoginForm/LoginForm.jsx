@@ -76,22 +76,20 @@ function LoginForm() {
           <form className="loginForm" onSubmit={login}>
               <InputLabel htmlFor="component-simple">Username</InputLabel>
               <Input 
-                id="component-simple" 
-            value={username}
+                value={username}
                 onChange={e => setUsername(e.target.value)} 
-          />
+              />
               <InputLabel htmlFor="component-simple">Password</InputLabel>
               <Input 
-            type="password"
-                id="component-simple" 
-            value={password}
+                type="password"
+                value={password}
                 onChange={e => setPassword(e.target.value)} 
-          />
+              />
               <Button variant="contained" type="submit">Login</Button>
-            <p>Don't Have An Account? 
-              <Link to='/registration'> Register Here</Link>
-            </p>
-    </form>
+              <p>Don't Have An Account? 
+                <Link to='/registration'> Register Here</Link>
+              </p>
+          </form>
           </Box>
         </div>
       </Paper> 
