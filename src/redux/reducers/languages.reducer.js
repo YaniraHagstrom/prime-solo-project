@@ -1,4 +1,4 @@
-const languagesReducer = (state={}, action)=> {
+const languagesReducer = (state=[], action)=> {
     switch (action.type){
         case 'SET_LANGUAGES':
             return action.payload;

@@ -18,10 +18,10 @@ export default function ChildForm(){
         })
     },[])
     const languages = useSelector(store=> store.languages)
-    const [childData, setChildData] = useState({age:'', primaryLanguage:'', secondaryLanguage:'', services:''});
+    const [childData, setChildData] = useState({age:'', primaryLanguage_id:'', secondaryLanguage_id:'', services:''});
 
 
-    console.log(languages);
+    console.log(childData);
     return(
         <>
             {/* Age Dropdown */}
@@ -43,11 +43,13 @@ export default function ChildForm(){
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel>Primary Language</InputLabel>
                 <Select
-                value={childData.primaryLanguage}
+                value={childData.primaryLanguage_id}
                 label='test'
-                onChange={e => setChildData({...childData, primaryLanguage: e.target.value})}
+                onChange={e => setChildData({...childData, primaryLanguage_id: e.target.value})}
                 >
-                    <MenuItem value='0-5'>0-5</MenuItem>
+                    {languages.map( language => (
+                        <MenuItem key={language.id} value={language.id}>{language.name}</MenuItem>
+                    ))}
                 </Select>
             </FormControl>
 
@@ -55,13 +57,15 @@ export default function ChildForm(){
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel>Secondary Language</InputLabel>
                 <Select
-                value={childData.secondaryLanguage}
+                value={childData.secondaryLanguage_id}
                 label='test'
-                onChange={e => setChildData({...childData, age: secondaryLanguage.target.value})}
+                onChange={e => setChildData({...childData, secondaryLanguage_id: e.target.value})}
                 >
-                    <MenuItem value='0-5'>0-5</MenuItem>
+                    {languages.map( language => (
+                        <MenuItem key={language.id} value={language.id}>{language.name}</MenuItem>
+                    ))}
                 </Select>
             </FormControl>
-        </>
+        </> 
     );
 }
