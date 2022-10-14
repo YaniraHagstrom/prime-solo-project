@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 
+// MUI Component Imports:
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import Button from '@mui/material/Button';
+
+import './loginForm.css';
+import loginPhoto from './loginPhoto.jpg';
+
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,41 +35,64 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
-      {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+    <Box 
+    sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '& > :not(style)': {
+        m: 10,
+        width: '70vw',
+        height: '70vh',
+      },
+    }}
+    >
+      <Paper elevation={3} >
+        <div className='loginBox'>
+          <Box
+            className='loginPhoto'
+            sx={{
+              '& > :not(style)': { 
+                width: '45vw',
+                height: '70vh',
+              },
+          }}
+          >
+            <img src={loginPhoto} alt="boy with map"></img>
+          </Box>
+          <Box
+          className='loginForm'
+          sx={{
+            '& > :not(style)': {
+              
+              width: '25  vw',
+              height: '70vh',
+            },
+            
+          }}
+          noValidate
+          autoComplete="off"
+          >
+          <form className="loginForm" onSubmit={login}>
+              <InputLabel htmlFor="component-simple">Username</InputLabel>
+              <Input 
+                id="component-simple" 
+                value={username} 
+                onChange={e => setUsername(e.target.value)} 
+                />
+              <InputLabel htmlFor="component-simple">Password</InputLabel>
+              <Input 
+                type="password"
+                id="component-simple" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+              />
+              <Button variant="contained" type="submit">Login</Button>
+          </form>
+          </Box>
+        </div>
+      </Paper> 
+    </Box>
   );
 }
 
