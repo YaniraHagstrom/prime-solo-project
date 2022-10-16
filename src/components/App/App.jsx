@@ -25,6 +25,7 @@ function App() {
   const user = useSelector(store => store.user);
 
   useEffect(() => {
+    // need to fetch children and render
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 

@@ -1,13 +1,14 @@
+-- DROP TABLE IF EXISTS country;
+-- DROP TABLE IF EXISTS city;
+-- DROP TABLE IF EXISTS "user";
+-- DROP TABLE IF EXISTS children;
+-- DROP TABLE IF EXISTS services;
+-- DROP TABLE IF EXISTS children_services;
+-- DROP TABLE IF EXISTS languages;
+-- DROP TABLE IF EXISTS children_languages;
+-- DROP TABLE IF EXISTS providers;
+-- DROP TABLE IF EXISTS providers_services;
 
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
 
 
 CREATE TABLE country (
@@ -27,10 +28,9 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL,
     "city_id" INT REFERENCES "city",
     "country_id" INT REFERENCES "country",
-    "date_created" DATE NOT NULL CURRENT_TIMESTAMP
+    "date_created" DATE DEFAULT CURRENT_TIMESTAMP
 	);
 
--- Need to look up default icon --
 CREATE TABLE children (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(50) NOT NULL,
@@ -39,16 +39,16 @@ CREATE TABLE children (
 	"user_id" INT REFERENCES "user"
 	);
 	
-CREATE TABLE therapies (
+CREATE TABLE services (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(50) NOT NULL
 	);
 	
-CREATE TABLE children_therapies (
-	"id" SERIAL PRIMARY KEY,
-	"child_id" INT REFERENCES "children"
-	);
-	
+--CREATE TABLE children_services (
+--	"id" SERIAL PRIMARY KEY,
+--	"child_id" INT REFERENCES "children"
+--	);
+--	
 CREATE TABLE languages (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(50) NOT NULL
@@ -57,7 +57,8 @@ CREATE TABLE languages (
 	
 CREATE TABLE children_languages (
 	"id" SERIAL PRIMARY KEY,
-	"child_id" INT REFERENCES "children"
+	"child_id" INT REFERENCES "children",
+	"language_id" INT REFERENCES "languages"
 	);
 	
 
@@ -73,11 +74,12 @@ CREATE TABLE providers (
 	"max_age" INT NOT NULL
 	);
 	
-CREATE TABLE provider_therapies (
+CREATE TABLE provider_services (
 	"id" SERIAL PRIMARY KEY,
 	"provider_id" INT REFERENCES "providers"
 	);
 	
+
 
 CREATE TABLE provider_languages (
 	"id" SERIAL PRIMARY KEY,
@@ -85,7 +87,45 @@ CREATE TABLE provider_languages (
 	);
 
 
-
+INSERT INTO services ("name")
+	VALUES 
+		('Speech Therapy'),
+		('Ocupational Therapy'),
+		('Physical Therapy'),
+		('Cognitive Behavior Therapy'),
+		('Feeding Therapy'),
+		('Joint Attention Therapy'),
+		('Early Intervention'),
+		('Parent-mediated Therapy'),
+		('Social Skills Training'),
+		('Behavioral Management Therapy');
+		
+INSERT INTO languages ("name")
+	VALUES
+		('Bulgarian'),
+		('Croatian'),
+		('Czech'),
+		('Danish'),
+		('Dutch'),
+		('English'),
+		('Estonian'),
+		('Finnish'),
+		('French'),
+		('German'),
+		('Greek'),
+		('Hungarian'),
+		('Irish'),
+		('Italian'),
+		('Latvian'),
+		('Lithuanian'),
+		('Maltese'),
+		('Polish'),
+		('Portuguese'),
+		('Romanian'),
+		('Slovak'),
+		('Slovenian'),
+		('Spanish'),
+		('Swedish');
 	
 	
 	

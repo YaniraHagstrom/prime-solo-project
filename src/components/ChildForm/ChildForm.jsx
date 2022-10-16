@@ -24,41 +24,34 @@ export default function ChildForm(){
 
     const languages = useSelector(store=> store.languages);
     const services = useSelector(store=> store.services);
+    // console.log(services); // [{id: 1, name: 'Speech Therapy'},..]
+
+    console.log(servicesChecked);
+
+    const [childData, setChildData] = useState({name:'', age:'', primaryLanguage_id:'', secondaryLanguage_id:''});
     
-    const [childData, setChildData] = useState({age:'', primaryLanguage_id:'', secondaryLanguage_id:''});
+    const [servicesChecked, setServicesChecked] = useState({1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false}
+    );
 
-    // when submit button is clicked, need to check which checkboxes are clicked and add them to an array to send to saga. 
-
-    // ** CheckBox Functionality **
-    const serviceId = services.map(service => { 
-        return service.id;
-    })
     
-    // 2. 👇 creates an object of service id's with a default value of false.
-    const checkedArray ={}
-    for (let id of serviceId){
-        checkedArray[id] = false;
-    }
-    // console.log(checkedArray);
+    console.log('Service Checked:',servicesChecked)
+    
 
-    const handleChange = (id) => {
-        if (!checkedArray[id]){
-            checkedArray[id] = true;
-        }
-        else{
-            checkedArray[id] = false;
-        }
-        // console.log(checkedArray);
-    }
-
-    // On Submit of this form:
-        // 1. Add child to children table
-        // 2. Add child_id and primary & secondary language to child_languages table
-        // 3. Add services checked to child_services table. 
     const handleSubmit = ()=> {
-        console.log('clicked')
-    }
+        const allChildData = {...childData, ...servicesChecked};
+        console.log(allChildData);
+        // On Submit of this form:
+            // 1. Add child to children table
+            dispatch({
+                type: 'SAGA_ADD_CHILD',
+                payload: allChildData
+            })
 
+            // 2. Add child_id and primary & secondary language to child_languages table
+            // 3. Add services checked to child_services table. 
+
+    }
+    // console.log(servicesChecked);
     return(
         <>
             <form >
@@ -66,6 +59,8 @@ export default function ChildForm(){
                 <TextField
                     id="outlined-required"
                     label="Name"
+                    value={childData.name}
+                    onChange={e => setChildData({...childData, name: e.target.value})}
                 />
                 {/* Age */}
                 <TextField
@@ -124,10 +119,20 @@ export default function ChildForm(){
                         key={service.id}
                         control={
                         <Checkbox
+                            // checked={false}
                             key={service.id}
-                            value={service.id}
-                            onChange={()=> handleChange(service.id)}
-                        />} 
+                            value={servicesChecked[service.id]}
+                            onChange={(e)=> {
+                                const serviceId = service.id;
+                                if (!servicesChecked[service.id]){
+                                    
+                                    setServicesChecked({...servicesChecked, [serviceId]: true})
+                                }
+                                else{
+                                    setServicesChecked({...servicesChecked, [serviceId]: false});
+                                }
+                            }}
+                            />} 
                     label={service.name} 
                     />
                 ))}

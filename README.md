@@ -42,7 +42,7 @@ If you would like to name your database something else, you will need to change 
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm run server`
 - Run `npm run client`
-- Navigate to `localhost:3000`
+- Navigate to `localhost:5000`
 
 ## Debugging
 
@@ -75,7 +75,7 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm start`
-- Navigate to `localhost:5000`
+- Navigate to `localhost:3000`
 
 ## Lay of the Land
 
