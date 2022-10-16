@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ServiceOptions from './ServiceOptions';
 
+
 import '../UserPage/userPage.css';
 
 // MUI Component Imports:
@@ -18,6 +19,9 @@ export default function ChildForm(){
         dispatch({
             type: 'SAGA_FETCH_LANGUAGES'
         })
+        dispatch({
+            type: 'SAGA_FETCH_SERVICES'
+        })
     },[])
     const languages = useSelector(store=> store.languages);
     const services = useSelector(store=> store.services);
@@ -26,6 +30,27 @@ export default function ChildForm(){
 
     // when submit button is clicked, need to check which checkboxes are clicked and add them to an array to send to saga. 
 
+    // ** CheckBox Functionality **
+    const serviceId = services.map(service => { 
+        return service.id;
+    })
+    
+    // 2. 👇 creates an object of service id's with a default value of false.
+    const checkedArray ={}
+    for (let id of serviceId){
+        checkedArray[id] = false;
+    }
+    console.log(checkedArray);
+
+    const handleChange = (id) => {
+        if (!checkedArray[id]){
+            checkedArray[id] = true;
+        }
+        else{
+            checkedArray[id] = false;
+        }
+        console.log(checkedArray);
+    }
 
     return(
         <>
@@ -72,8 +97,20 @@ export default function ChildForm(){
                 </Select>
             </FormControl>
             {/* Service Checkboxes */}
-            <ServiceOptions />
-
+            <div>
+            {services.map(service=> (
+                <FormControlLabel
+                    key={service.id}
+                    control={
+                    <Checkbox
+                        key={service.id}
+                        value={service.id}
+                        onChange={()=> handleChange(service.id)}
+                    />} 
+                label={service.name} 
+                />
+            ))}
+            </div>
         </>
     );
 }

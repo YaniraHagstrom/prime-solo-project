@@ -15,32 +15,31 @@ export default function ServiceOptions() {
     },[])
     const services = useSelector(store=> store.services);
     // console.log(services.length);
-    // 1. create an array equal to the length of the number of checkboxes and use the array 'fill' method. 
-
-    const [checkedState, setCheckedState]= useState();
-
-
-    // 2. Create an array of objects that will allow us to update whether the checkbox was checked or not:
-    // 👇 creates an array of the service id's from services.
+    
+    // 1. 👇 creates an array of the service id's from services.
     const serviceId = services.map(service => { 
         return service.id;
     })
     
-    // 👇 creates an object of service id's with a default value of false.
+    // 2. 👇 creates an object of service id's with a default value of false.
     const checkedArray ={}
     for (let id of serviceId){
         checkedArray[id] = false;
     }
 
     console.log(checkedArray);
-    console.log(serviceId);
-    
-    // const handleChange = (position) => {
-    //     const updatedCheckedState = checkedState.map((item, index) =>
-    //         index === position ? !item : item
-    //     );
+    // console.log(serviceId);
 
-    //     setCheckedState(updatedCheckedState);
+    //2. When the box is checked/unchecked, need to change the value for the service id to true/false:
+    const handleChange = (id) => {
+        if (!checkedArray[id]){
+            checkedArray[id] = true;
+        }
+        else{
+            checkedArray[id] = false;
+        }
+        console.log(checkedArray);
+    }
 
     return(
         
@@ -52,8 +51,9 @@ export default function ServiceOptions() {
                     <Checkbox
                         key={service.id}
                         value={service.id}
-                        onChange={() => handleChange()}
-                    />} label={service.name} 
+                        onChange={()=> handleChange(service.id)}
+                    />} 
+                label={service.name} 
                 />
             ))}
         </div>
