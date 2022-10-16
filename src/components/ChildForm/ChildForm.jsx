@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ServiceOptions from './ServiceOptions';
 
-import './userPage.css';
+import '../UserPage/userPage.css';
 
 // MUI Component Imports:
 import { InputLabel, FormControl, Select, MenuItem, FormHelperText } from "@mui/material";
@@ -10,25 +11,22 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-
-
-
 export default function ChildForm(){
     const dispatch = useDispatch();
-
+    
     useEffect(()=>{
         dispatch({
             type: 'SAGA_FETCH_LANGUAGES'
         })
-        dispatch({
-            type: "SAGA_FETCH_SERVICES"
-        })
     },[])
-    const languages = useSelector(store=> store.languages)
-    const [childData, setChildData] = useState({age:'', primaryLanguage_id:'', secondaryLanguage_id:'', services:[]});
+    const languages = useSelector(store=> store.languages);
+    const services = useSelector(store=> store.services);
+    
+    const [childData, setChildData] = useState({age:'', primaryLanguage_id:'', secondaryLanguage_id:''});
+
+    // when submit button is clicked, need to check which checkboxes are clicked and add them to an array to send to saga. 
 
 
-    console.log(childData);
     return(
         <>
             {/* Age Dropdown */}
@@ -73,13 +71,9 @@ export default function ChildForm(){
                     ))}
                 </Select>
             </FormControl>
-
             {/* Service Checkboxes */}
-            <div>
-                <FormGroup>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                </FormGroup>
-            </div>
-        </> 
+            <ServiceOptions />
+
+        </>
     );
 }

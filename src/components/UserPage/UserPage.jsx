@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import icon from './iconImages/dragonfly.jpg'
 import './userPage.css';
-import ChildForm from './ChildForm';
+import ChildForm from '../ChildForm/ChildForm';
 
 // MUI Imports:
 import Avatar from '@mui/material/Avatar';
