@@ -26,32 +26,26 @@ export default function ChildForm(){
     const services = useSelector(store=> store.services);
     // console.log(services); // [{id: 1, name: 'Speech Therapy'},..]
 
-    console.log(servicesChecked);
-
+    
     const [childData, setChildData] = useState({name:'', age:'', primaryLanguage_id:'', secondaryLanguage_id:''});
     
-    const [servicesChecked, setServicesChecked] = useState({1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false}
-    );
-
-    
+    const [servicesChecked, setServicesChecked] = useState({1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false});
+        
     console.log('Service Checked:',servicesChecked)
-    
 
     const handleSubmit = ()=> {
-        const allChildData = {...childData, ...servicesChecked};
+        const servicesObject = {services: servicesChecked}
+        //services:{1: true, 2: false, 3: false,...}
+
+        const allChildData = {...childData, ...servicesObject};
         console.log(allChildData);
-        // On Submit of this form:
-            // 1. Add child to children table
             dispatch({
                 type: 'SAGA_ADD_CHILD',
                 payload: allChildData
             })
-
-            // 2. Add child_id and primary & secondary language to child_languages table
-            // 3. Add services checked to child_services table. 
-
     }
-    // console.log(servicesChecked);
+
+    console.log(servicesChecked);
     return(
         <>
             <form >
@@ -70,20 +64,6 @@ export default function ChildForm(){
                     value={childData.age}
                     onChange={e => setChildData({...childData, age: e.target.value})}
                 />
-                {/* Age Range DropDown Menu */}
-                {/* <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel>Age</InputLabel>
-                    <Select
-                    value={childData.age}
-                    label='test'
-                    onChange={e => setChildData({...childData, age: e.target.value})}
-                    >
-                        <MenuItem value='0-5'>0-5</MenuItem>
-                        <MenuItem value='6-10'>6-10</MenuItem>
-                        <MenuItem value='11-17'>11-17</MenuItem>
-                        <MenuItem value='18'>18+</MenuItem>
-                    </Select>
-                </FormControl> */}
 
                 {/* Primary Language Dropdown */}
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -119,12 +99,16 @@ export default function ChildForm(){
                         key={service.id}
                         control={
                         <Checkbox
-                            // checked={false}
+                        // services = [{id: 1, name: 'Speech Therapy'},..]
+
+                        // servicesChecked ={1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false}
                             key={service.id}
                             value={servicesChecked[service.id]}
-                            onChange={(e)=> {
+                            onChange={()=> {
+                                // console.log(e.target.value)
+                                // console.log(servicesChecked.taco[service.id]); //false
                                 const serviceId = service.id;
-                                if (!servicesChecked[service.id]){
+                                if (!servicesChecked[serviceId]){
                                     
                                     setServicesChecked({...servicesChecked, [serviceId]: true})
                                 }

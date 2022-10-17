@@ -35,7 +35,7 @@ function* fetchLanguages(){
 
 function* addChild(action){
     const newChildData = action.payload;
-    // console.log(newChildData);
+    console.log(newChildData);
     try{ 
         const newChild = yield axios({
             method: 'POST',

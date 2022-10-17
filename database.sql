@@ -44,10 +44,10 @@ CREATE TABLE services (
 	"name" VARCHAR(50) NOT NULL
 	);
 	
---CREATE TABLE children_services (
---	"id" SERIAL PRIMARY KEY,
---	"child_id" INT REFERENCES "children"
---	);
+CREATE TABLE children_services (
+	"id" SERIAL PRIMARY KEY,
+	"child_id" INT REFERENCES "children"
+	);
 --	
 CREATE TABLE languages (
 	"id" SERIAL PRIMARY KEY,
