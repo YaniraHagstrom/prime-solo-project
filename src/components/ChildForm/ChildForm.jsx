@@ -121,7 +121,9 @@ export default function ChildForm(){
                     />
                 ))}
                 </div>
-                <Button onClick={handleSubmit} variant="contained" >Add Child</Button>
+                <Link to='/results'>
+                <Button onClick={handleSubmit} variant="contained" >Add Child and Find Providers</Button>
+                </Link>
             </form>
         </>
     );

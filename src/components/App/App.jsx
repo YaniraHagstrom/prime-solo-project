@@ -16,6 +16,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ChildForm from '../ChildForm/ChildForm';
+import Results from '../Results/Results';
 
 import './App.css';
 
@@ -58,6 +59,10 @@ function App() {
 
           <ProtectedRoute exact path='/addChild'>
             <ChildForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path='/results'>
+            <Results />
           </ProtectedRoute>
 
           <Route exact path="/login">
