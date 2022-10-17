@@ -4,6 +4,8 @@ import user from './user.reducer';
 import languages from './languages.reducer';
 import services from './services.reducer';
 import childDataReducer from './childForm.reducer';
+import countries from './countries.reducer';
+import cities from './cities.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   languages,
   services,
   childDataReducer,
+  countries,
+  cities,
 });
 
 export default rootReducer;

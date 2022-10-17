@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const languagesRouter = require('./routes/languages.router');
 const servicesRouter = require('./routes/services.router');
 const childRouter = require('./routes/child.router');
+const locationRouter = require('./routes/location.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/languages', languagesRouter);
 app.use('/api/services', servicesRouter);
 app.use('/api/child', childRouter);
+app.use('/api/location', locationRouter);
 
 // Serve static files
 app.use(express.static('build'));

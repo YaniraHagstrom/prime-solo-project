@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 import '../UserPage/userPage.css';
 
 // MUI Component Imports:
@@ -47,7 +46,11 @@ export default function ChildForm(){
             type: 'SET_CHILD',
             payload: allChildData
         })
-        
+        // dispatch to GET provider that match
+        dispatch({
+            type: 'SAGA_GET_RESULTS',
+            payload: allChildData
+        })
     }
 
     return(
