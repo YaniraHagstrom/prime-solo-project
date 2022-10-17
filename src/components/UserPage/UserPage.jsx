@@ -33,8 +33,11 @@ function UserPage() {
         </div>
         <div className='otherBox'>
           {/* Need to render button to add a child */}
-          <ChildForm />
+          {/* <ChildForm /> */}
+          {/* When 'Add Child' button is clicked, send to ChildForm component */}
+        <Link to='/addChild'>
         <Button variant="contained">Add Child</Button>
+        </Link>
         </div>
       </div>
     </>

@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import {
-  HashRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+  HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -19,6 +15,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ChildForm from '../ChildForm/ChildForm';
+import Results from '../Results/Results';
 
 import './App.css';
 
@@ -28,6 +26,7 @@ function App() {
   const user = useSelector(store => store.user);
 
   useEffect(() => {
+    // need to fetch children and render
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
@@ -56,6 +55,14 @@ function App() {
           {/* // logged in shows InfoPage else shows LoginPage */}
           <ProtectedRoute exact path="/info">
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path='/addChild'>
+            <ChildForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path='/results'>
+            <Results />
           </ProtectedRoute>
 
           <Route exact path="/login">
