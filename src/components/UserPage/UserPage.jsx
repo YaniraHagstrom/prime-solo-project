@@ -30,17 +30,24 @@ function UserPage() {
   // console.log(countries);
 
   const [locationData, setLocationData] = useState({country_id:'', city_id:''});
-  // const [countryId, setCountryId] = useState(0);
-  // console.log(countryId);
-  // filtering cities by the country selected to populate dropdown.
-  // const [countryCities, setCountryCities] = useState({});
+
+  console.log('location data:',locationData );
+
 
   const handleCountry =(e)=> {
-    setLocationData({...locationData, country_id: e.target.value});
+    // setLocationData({...locationData, country_id: e.target.value});
     // console.log(countryId);
     dispatch({
       type:'SAGA_GET_CITIES',
       payload: e.target.value
+    })
+  }
+
+  const handleCityChange = (e)=> {
+    setLocationData({...locationData, city_id: e.target.value});
+    dispatch({
+      type: 'SAGA_ADD_LOCATION',
+      payload: locationData
     })
   }
 
@@ -73,7 +80,7 @@ function UserPage() {
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel>Country</InputLabel>
           <Select
-          value={countries.id}
+          value={locationData.country_id}
           label='test'
           onChange={handleCountry}
           >
@@ -87,9 +94,12 @@ function UserPage() {
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel>City</InputLabel>
           <Select 
-          // value={childData.primaryLanguage_id}
-          // label='test'
-          // onChange={e => setChildData({...childData, primaryLanguage_id: e.target.value})}
+          value={locationData.city_id}
+          label='test'
+          onChange={e => {
+            setLocationData({...locationData, country_id: e.target.value});
+            handleCityChange(e);
+          }}
           >
               {cities.map(city => (
                   <MenuItem key={city.id} value={city.id}>{city.name}</MenuItem>
