@@ -17,6 +17,7 @@ import LoginForm from '../LoginForm/LoginForm';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ChildForm from '../ChildForm/ChildForm';
 import Results from '../Results/Results';
+import CreateProfile from '../UserPage/CreateProfile';
 
 import './App.css';
 
@@ -84,6 +85,10 @@ function App() {
               <RegisterPage />
             }
           </Route>
+
+          <ProtectedRoute exact path="/createProfile"> 
+            <CreateProfile />
+          </ProtectedRoute>
 
           <Route exact path="/home">
             {user.id ?

@@ -69,7 +69,7 @@ function RegisterForm() {
           noValidate
           autoComplete="off"
           >
-          <form className="loginForm" onSubmit={registerUser}>
+          <form className="loginForm" >
               <InputLabel htmlFor="component-simple">Username</InputLabel>
               <Input 
                 type="text"
@@ -84,7 +84,9 @@ function RegisterForm() {
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
               />
-              <Button variant="contained" type="submit">Register</Button>
+              <Link to='/createProfile'>
+                <Button onClick={registerUser} variant="contained" type="submit">Register</Button>
+              </Link>
               <p>Already Have An Account? 
                 <Link to='/login'> Login Here</Link>
               </p>
