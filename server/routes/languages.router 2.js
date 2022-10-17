@@ -4,14 +4,14 @@ const pool = require('../modules/pool');
 
 router.get('/', (req, res)=> {
     const sqlQuery=`
-        SELECT * FROM services;
+        SELECT * FROM languages;
     `
     pool.query(sqlQuery)
         .then(dbRes => {
             res.send(dbRes.rows);
         })
         .catch(dbErr=> {
-            res.send('Error in GET /services', dbErr);
+            res.send('Error in GET /languages', dbErr);
         })
 })
 

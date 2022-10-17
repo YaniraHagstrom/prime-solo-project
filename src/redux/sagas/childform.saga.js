@@ -49,13 +49,26 @@ function* addChild(action){
     }
 }
 
-
+function* searchProviders(action){
+    const newChildData = action.payload;
+    console.log(newChildData)
+    try{ 
+        const searchResults = yield axios({
+            method: 'GET',
+            url: `/api/child/${newChildData}`
+        })
+        
+    }
+    catch (error) {
+        console.log('Error with adding child:', error);
+    }
+}
 
 function* childFormSaga(){
     yield takeLatest('SAGA_FETCH_SERVICES', fetchServices),
     yield takeLatest('SAGA_FETCH_LANGUAGES', fetchLanguages)
-    yield takeLatest('SAGA_ADD_CHILD', addChild);
-    
-}
+    yield takeLatest('SAGA_ADD_CHILD', addChild),
+    yield takeLatest('SAGA_GET_RESULTS', searchProviders)
+;}
 
 export default childFormSaga;

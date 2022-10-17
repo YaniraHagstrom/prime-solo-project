@@ -11,7 +11,7 @@ router.get('/', (req, res)=> {
             res.send(dbRes.rows);
         })
         .catch(dbErr=> {
-            res.send('Error in GET /services', dbErr);
+            res.send('Error in GET /languages', dbErr);
         })
 })
 
