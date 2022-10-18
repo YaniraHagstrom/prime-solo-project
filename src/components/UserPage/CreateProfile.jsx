@@ -16,7 +16,7 @@ import { InputLabel, FormControl, Select, MenuItem,FormControlLabel } from "@mui
 export default function CreateProfile(){
 
     const dispatch=useDispatch();
-    // Need GET request to get countries and Cities for country and city dropdown.
+    //  Need GET request to get countries and Cities for country and city dropdown.
     useEffect(()=> {
         dispatch({
         type: 'SAGA_GET_COUNTRIES'
@@ -31,10 +31,11 @@ export default function CreateProfile(){
 
     const [locationData, setLocationData] = useState({country_id:'', city_id:''});
 
-    console.log('location data:',locationData );
+    // console.log('location data:',locationData );
 
 
     const handleCountry =(e)=> {
+        e.preventDefault();
         setLocationData({...locationData, country_id: e.target.value});
         // console.log(countryId);
         dispatch({
@@ -44,11 +45,19 @@ export default function CreateProfile(){
     }
 
 
-    const handleSubmit=()=> {
+    const handleSubmit=(e)=> {
+        e.preventDefault();
+        console.log('button clicked:', locationData)
+        // update user data table with new location data:
         dispatch({
             type: 'SAGA_ADD_LOCATION',
             payload: locationData
             })
+        // send location data to user reducer:
+        dispatch({
+            type: 'UPDATE_USER_LOCATION',
+            payload: locationData
+        })
     }
 
     return(
@@ -65,9 +74,9 @@ export default function CreateProfile(){
                 <div className='otherBox'>
                 </div>
             </div>
-            <div>
+            <form onSubmit={handleSubmit}>
                 {/* Countries Dropdown */}
-                <FormControl sx={{ m: 1, minWidth: 120 }} onSubmit={handleSubmit}>
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel>Country</InputLabel>
                     <Select
                     value={locationData.country_id}
@@ -93,10 +102,8 @@ export default function CreateProfile(){
                         ))}
                     </Select>
                 </FormControl>
-                <Link to='/user'>
                     <Button variant="contained" type="submit" >Submit</Button>
-                </Link>
-            </div>
+            </form>
         </>
     )
 }
