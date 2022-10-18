@@ -44,7 +44,7 @@ export default function CreateProfile(){
     }
 
 
-    const sendLocationData=()=> {
+    const handleSubmit=()=> {
         dispatch({
             type: 'SAGA_ADD_LOCATION',
             payload: locationData
@@ -67,7 +67,7 @@ export default function CreateProfile(){
             </div>
             <div>
                 {/* Countries Dropdown */}
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <FormControl sx={{ m: 1, minWidth: 120 }} onSubmit={handleSubmit}>
                     <InputLabel>Country</InputLabel>
                     <Select
                     value={locationData.country_id}
@@ -94,7 +94,7 @@ export default function CreateProfile(){
                     </Select>
                 </FormControl>
                 <Link to='/user'>
-                    <Button variant="contained" onClick={sendLocationData}>Submit</Button>
+                    <Button variant="contained" type="submit" >Submit</Button>
                 </Link>
             </div>
         </>

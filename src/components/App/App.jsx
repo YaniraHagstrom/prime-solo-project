@@ -17,7 +17,7 @@ import LoginForm from '../LoginForm/LoginForm';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ChildForm from '../ChildForm/ChildForm';
 import Results from '../Results/Results';
-import CreateProfile from '../UserPage/CreateProfile';
+import CreateProfile from '../UserPage/CreateProfile'
 
 import './App.css';
 
@@ -44,25 +44,28 @@ function App() {
           <Route exact path="/about">
             <AboutPage />
           </Route>
-          {/* For protected routes, the view could show one of several things on the same route.
+          {/* For protected routes, the view could show one of    several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           {/* // logged in shows UserPage else shows LoginPage */}
+
+          {/* After registering, the user needs to set up their profile and select their country and city. Once this is selected, they can go to their user page */}
           <ProtectedRoute exact path="/user"> 
             <UserPage />
           </ProtectedRoute>
+
 
           {/* // logged in shows InfoPage else shows LoginPage */}
           <ProtectedRoute exact path="/info">
             <InfoPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path='/addChild'>
+          <ProtectedRoute exact path="/addChild">
             <ChildForm />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path='/results'>
+          <ProtectedRoute exact path="/results">
             <Results />
           </ProtectedRoute>
 
@@ -77,7 +80,7 @@ function App() {
           </Route>
 
           <Route exact path="/registration">
-            {user.id ?
+            {user.id?
               // If the user is already logged in, redirect to the /user page
               <Redirect to="/user" />
               :
@@ -85,10 +88,7 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
-          <ProtectedRoute exact path="/createProfile"> 
-            <CreateProfile />
-          </ProtectedRoute>
+          
 
           <Route exact path="/home">
             {user.id ?
