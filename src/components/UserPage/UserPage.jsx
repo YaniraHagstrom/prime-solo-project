@@ -17,40 +17,28 @@ import { InputLabel, FormControl, Select, MenuItem,FormControlLabel } from "@mui
 
 function UserPage() {
   const dispatch=useDispatch();
-  // Need GET request to get countries and Cities for country and city dropdown.
   useEffect(()=> {
     dispatch({
-      type: 'SAGA_GET_COUNTRIES'
+    type: 'SAGA_GET_COUNTRIES'
     })
-    
-  },[]) 
+    dispatch({
+      type:'SAGA_GET_CITIES',
+      payload: user.city_id
+      })
+},[]) 
 
   const user = useSelector((store) => store.user);
   const countries = useSelector(store => store.countries);
   const cities = useSelector(store=> store.cities);
-  // console.log(countries);
+  // console.log(cities);
+  // const [countryName, setCountryName] = useState(null)
 
-  const [locationData, setLocationData] = useState({country_id:'', city_id:''});
+  // for (let country of countries){
+  //   if (country.id === user.country_id){
+  //     setCountryName(country.name);
+  //   }
+  // }
 
-  console.log('location data:',locationData );
-
-
-  const handleCountry =(e)=> {
-    // setLocationData({...locationData, country_id: e.target.value});
-    // console.log(countryId);
-    dispatch({
-      type:'SAGA_GET_CITIES',
-      payload: e.target.value
-    })
-  }
-
-  const handleCityChange = (e)=> {
-    setLocationData({...locationData, city_id: e.target.value});
-    dispatch({
-      type: 'SAGA_ADD_LOCATION',
-      payload: locationData
-    })
-  }
 
   return (
     // need to conditional render CreateProfile if there is no country_id && city_id
@@ -68,50 +56,20 @@ function UserPage() {
               alt="Dragonfly" 
               src={icon}
               sx={{ width: 150, height: 150 }} />
-            <h2>Welcome, {user.username}!</h2>
+            <h2>{user.username}</h2>
             {/* <p>Your ID is: {user.id}</p> */}
+            {/* <h3>{cityName},</h3> */}
+
+            {/* <h3>{countryName}</h3> */}
           </div>
           <div className='otherBox'>
-            {/* Need to render button to add a child */}
-            {/* <ChildForm /> */}
+            {/* Will need to conditionally render list of children or if no children in list, then have add child button with message */}
+            {/* <ChildList /> */}
             {/* When 'Add Child' button is clicked, send to ChildForm component */}
           <Link to='/addChild'>
           <Button variant="contained">Add Child</Button>
           </Link>
           </div>
-        </div>
-        <div>
-
-        {/* Countries Dropdown */}
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel>Country</InputLabel>
-            <Select
-            value={locationData.country_id}
-            label='test'
-            onChange={handleCountry}
-            >
-              {countries.map( country => (
-                <MenuItem key={country.id} value={country.id}>{country.name}</MenuItem>
-              ))} 
-            </Select>
-            </FormControl>
-
-          {/* Cities Dropdown */}
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel>City</InputLabel>
-            <Select 
-            value={locationData.city_id}
-            label='test'
-            onChange={e => {
-              setLocationData({...locationData, country_id: e.target.value});
-              handleCityChange(e);
-            }}
-            >
-                {cities.map(city => (
-                    <MenuItem key={city.id} value={city.id}>{city.name}</MenuItem>
-                ))}
-            </Select>
-          </FormControl>
         </div>
       </>
       }

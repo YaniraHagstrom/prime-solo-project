@@ -12,7 +12,7 @@ router.get('/countries', (req, res)=> {
             res.send(dbRes.rows);
         })
         .catch(dbErr=> {
-            res.send('Error in GET /location', dbErr);
+            res.send('Error in GET /location/countries', dbErr);
         })
 })
 
@@ -29,31 +29,38 @@ router.get('/cities/:id', (req, res)=> {
             res.send(dbRes.rows);
         })
         .catch(dbErr=> {
-            res.send('Error in GET /location', dbErr);
+            res.send('Error in GET /location/cities', dbErr);
         })
 })
 
-router.post('/', (req, res)=> {
-    const userCountry = req.body.country_id;
-    const userCity=req.body.city_id
-    console.log(req.body);
-
-    // const sqlQuery = 
-    // `SELECT * FROM city
-    //     WHERE country_id = $1
-    // ;`
-    // const sqlValues= [country_id]
-    // pool.query(sqlQuery, sqlValues)
-    //     .then(dbRes => {
-    //         res.send(dbRes.rows);
-    //     })
-    //     .catch(dbErr=> {
-    //         res.send('Error in GET /location', dbErr);
-    //     })
+router.put('/', (req, res)=> {
+    const {country_id, city_id} = req.body;
+    const userID = req.user.id;
+    const sqlQuery = 
+        `UPDATE "user"
+            SET 
+                country_id = $1,
+                city_id = $2
+            WHERE id = $3
+        ;`
+    const sqlValues= [country_id, city_id, userID];
+    pool.query(sqlQuery, sqlValues)
+        .then((result) => {
+            res.sendStatus(200);
+        })
+        .catch(dbErr=> {
+            res.sendStatus(500);
+            console.log('Error in PUT /location', dbErr);
+        })
 })
 
 
-
+// UPDATE students
+//       SET
+//         github_name = $1, 
+//         skill_level = $2
+//       WHERE
+//         id = $3
 
 
 module.exports = router;

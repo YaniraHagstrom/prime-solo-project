@@ -19,15 +19,16 @@ function* getCountries(){
 }
 
 function* getCities(action){
+    // will only get cities for country_id selected in CreateProfile page. 
     const country_id = action.payload;
     try{ 
-        const countries = yield axios({
+        const cities = yield axios({
             method: 'GET',
             url: `/api/location/cities/${country_id}`
         })
         yield put({
             type: 'SET_CITIES',
-            payload: countries.data
+            payload: cities.data
         })
     }
     catch (error) {
@@ -38,19 +39,20 @@ function* getCities(action){
 function* postLocation(action){
     const locationData = action.payload;
     console.log('location data',locationData)
-    // try{ 
-    //     const userDestination = yield axios({
-    //         method: 'POST',
-    //         url: `/api/location/${locationData}`
-    //     })
-    //     yield put({
-    //         type: 'SET_LOCATION',
-    //         payload: userDestination.data
-    //     })
-    // }
-    // catch (error) {
-    //     console.log('Error with fetching cities:', error);
-    // }
+    try{ 
+        const userDestination = yield axios({
+            method: 'PUT',
+            url: '/api/location',
+            data: locationData
+        })
+        yield put({
+            type: 'SET_LOCATION',
+            payload: userDestination.data
+        })
+    }
+    catch (error) {
+        console.log('Error with posting locationData:', error);
+    }
 }
 
 

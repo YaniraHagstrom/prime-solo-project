@@ -41,11 +41,12 @@ export default function ChildForm(){
             type: 'SAGA_ADD_CHILD',
             payload: allChildData
         })
+        // ??? DO I NEED THIS ???
         // dispatch to add child data to childData reducer for use in provider search:
-        dispatch({
-            type: 'SET_CHILD',
-            payload: allChildData
-        })
+        // dispatch({
+        //     type: 'SET_CHILD',
+        //     payload: allChildData
+        // })
         // dispatch to GET provider that match
         dispatch({
             type: 'SAGA_GET_RESULTS',
