@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import icon from './iconImages/dragonfly.jpg'
 import './userPage.css';
 import ChildForm from '../ChildForm/ChildForm';
+import CreateProfile from './CreateProfile';
 
 // MUI Imports:
 import Avatar from '@mui/material/Avatar';
@@ -52,61 +53,68 @@ function UserPage() {
   }
 
   return (
+    // need to conditional render CreateProfile if there is no country_id && city_id
     <>
-      <header>
-        <Link to='/home'>Logout</Link>
-      </header>
-      <div className='container'>
-        <div className="userBox">
-          <Avatar 
-            alt="Dragonfly" 
-            src={icon}
-            sx={{ width: 150, height: 150 }} />
-          <h2>Welcome, {user.username}!</h2>
-          {/* <p>Your ID is: {user.id}</p> */}
+      { !user.city_id ? 
+      <CreateProfile/>
+      :
+      <>
+        <header>
+          <Link to='/home'>Logout</Link>
+        </header>
+        <div className='container'>
+          <div className="userBox">
+            <Avatar 
+              alt="Dragonfly" 
+              src={icon}
+              sx={{ width: 150, height: 150 }} />
+            <h2>Welcome, {user.username}!</h2>
+            {/* <p>Your ID is: {user.id}</p> */}
+          </div>
+          <div className='otherBox'>
+            {/* Need to render button to add a child */}
+            {/* <ChildForm /> */}
+            {/* When 'Add Child' button is clicked, send to ChildForm component */}
+          <Link to='/addChild'>
+          <Button variant="contained">Add Child</Button>
+          </Link>
+          </div>
         </div>
-        <div className='otherBox'>
-          {/* Need to render button to add a child */}
-          {/* <ChildForm /> */}
-          {/* When 'Add Child' button is clicked, send to ChildForm component */}
-        <Link to='/addChild'>
-        <Button variant="contained">Add Child</Button>
-        </Link>
-        </div>
-      </div>
-      <div>
+        <div>
 
-      {/* Countries Dropdown */}
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel>Country</InputLabel>
-          <Select
-          value={locationData.country_id}
-          label='test'
-          onChange={handleCountry}
-          >
-            {countries.map( country => (
-              <MenuItem key={country.id} value={country.id}>{country.name}</MenuItem>
-            ))} 
-          </Select>
+        {/* Countries Dropdown */}
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel>Country</InputLabel>
+            <Select
+            value={locationData.country_id}
+            label='test'
+            onChange={handleCountry}
+            >
+              {countries.map( country => (
+                <MenuItem key={country.id} value={country.id}>{country.name}</MenuItem>
+              ))} 
+            </Select>
+            </FormControl>
+
+          {/* Cities Dropdown */}
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel>City</InputLabel>
+            <Select 
+            value={locationData.city_id}
+            label='test'
+            onChange={e => {
+              setLocationData({...locationData, country_id: e.target.value});
+              handleCityChange(e);
+            }}
+            >
+                {cities.map(city => (
+                    <MenuItem key={city.id} value={city.id}>{city.name}</MenuItem>
+                ))}
+            </Select>
           </FormControl>
-
-        {/* Cities Dropdown */}
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel>City</InputLabel>
-          <Select 
-          value={locationData.city_id}
-          label='test'
-          onChange={e => {
-            setLocationData({...locationData, country_id: e.target.value});
-            handleCityChange(e);
-          }}
-          >
-              {cities.map(city => (
-                  <MenuItem key={city.id} value={city.id}>{city.name}</MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-      </div>
+        </div>
+      </>
+      }
     </>
   );
 }
