@@ -46,7 +46,8 @@ CREATE TABLE services (
 	
 CREATE TABLE children_services (
 	"id" SERIAL PRIMARY KEY,
-	"child_id" INT REFERENCES "children"
+	"child_id" INT REFERENCES "children",
+	"service_id" INT REFERENCES "services"
 	);
 --	
 CREATE TABLE languages (
@@ -77,12 +78,14 @@ CREATE TABLE providers (
 CREATE TABLE provider_services (
 	"id" SERIAL PRIMARY KEY,
 	"provider_id" INT REFERENCES "providers"
+	"service_id" INT REFERENCES "services"
 	);
 	
 
 
 CREATE TABLE provider_languages (
 	"id" SERIAL PRIMARY KEY,
+	"language_id" INT REFERENCES "languages",
 	"provider_id" INT REFERENCES "providers"
 	);
 

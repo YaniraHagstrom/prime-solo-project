@@ -29,7 +29,8 @@ router.get('/cities/:id', (req, res)=> {
             res.send(dbRes.rows);
         })
         .catch(dbErr=> {
-            res.send('Error in GET /location/cities', dbErr);
+            console.log('Error in GET /location/cities', dbErr);
+            res.sendStatus(500)
         })
 })
 

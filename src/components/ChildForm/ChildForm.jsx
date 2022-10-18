@@ -30,26 +30,17 @@ export default function ChildForm(){
     const [servicesChecked, setServicesChecked] = useState({1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false});
         
 
-    const handleSubmit = ()=> {
+    const handleSubmit = (e)=> {
+        e.preventDefault();
         const servicesObject = {services: servicesChecked}
         //services:{1: true, 2: false, 3: false,...}
+        console.log(servicesChecked);
 
         const allChildData = {...childData, ...servicesObject};
-        // console.log(allChildData);
+        console.log(allChildData);
         // dispatch to add data to appropriate tables:
         dispatch({
             type: 'SAGA_ADD_CHILD',
-            payload: allChildData
-        })
-        // ??? DO I NEED THIS ???
-        // dispatch to add child data to childData reducer for use in provider search:
-        // dispatch({
-        //     type: 'SET_CHILD',
-        //     payload: allChildData
-        // })
-        // dispatch to GET provider that match
-        dispatch({
-            type: 'SAGA_GET_RESULTS',
             payload: allChildData
         })
     }
@@ -112,7 +103,8 @@ export default function ChildForm(){
                         <Checkbox
                         // services = [{id: 1, name: 'Speech Therapy'},..]
 
-                        // servicesChecked ={1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false}
+                        // servicesChecked = {service: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false}
+                            checked={servicesChecked[service.id]}
                             key={service.id}
                             value={servicesChecked[service.id]}
                             onChange={()=> {
@@ -135,7 +127,11 @@ export default function ChildForm(){
                 <Link to='/results'>
                     <Button onClick={handleSubmit} variant="contained" >Add Child and Find Providers</Button>
                 </Link>
+                <Link to='/user'>
+                    <Button variant="contained" >Cancel</Button>
+                </Link>
             </form>
         </>
     );
 }
+
