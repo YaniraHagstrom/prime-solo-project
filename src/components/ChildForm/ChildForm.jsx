@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,7 +12,8 @@ import { InputLabel, FormControl, Select, MenuItem, Checkbox, FormGroup, FormCon
 
 export default function ChildForm(){
     const dispatch = useDispatch();
-    
+    const history = useHistory();
+
     useEffect(()=>{
         dispatch({
             type: 'SAGA_FETCH_LANGUAGES'
@@ -51,6 +52,7 @@ export default function ChildForm(){
             type: 'SET_CHILD',
             payload: servicesChecked
         })
+        history.push("/results");
     }
 
     return(
@@ -159,9 +161,7 @@ export default function ChildForm(){
                             />
                         ))}
                         </div>
-                        <Link to='/results'>
-                            <Button color="success"  variant="contained" >Add Child and Find Providers</Button>
-                        </Link>
+                        <Button color="success"  variant="contained" type="submit">Add Child and Find Providers </Button>
                         <Link to='/user'>
                             <Button color="success" variant="contained" >Cancel</Button>
                         </Link>
