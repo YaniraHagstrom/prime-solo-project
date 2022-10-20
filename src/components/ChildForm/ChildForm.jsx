@@ -43,6 +43,11 @@ export default function ChildForm(){
             type: 'SAGA_ADD_CHILD',
             payload: allChildData
         })
+        // add child data to reducer to use for filtering through provider results. 
+        dispatch({
+            type: 'SET_CHILD',
+            payload: servicesChecked
+        })
     }
 
     return(

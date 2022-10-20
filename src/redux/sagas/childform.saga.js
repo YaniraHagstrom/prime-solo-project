@@ -62,7 +62,10 @@ function* searchProviders(action){
             method: 'GET',
             url: `/api/child/${childID}`
         })
-        yield console.log(searchResults.data);
+        yield put({
+            type: 'SET_RESULTS',
+            payload: searchResults.data
+        })
     }
     catch (error) {
         console.log('Error with adding child:', error);
