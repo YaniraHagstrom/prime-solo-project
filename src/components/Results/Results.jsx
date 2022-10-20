@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import ProviderItem from "./ProviderItem";
 
 export default function Results(){
     const dispatch = useDispatch();
@@ -7,10 +8,7 @@ export default function Results(){
     const providerResults = useSelector(store=> store.results);
 
     const childServices = useSelector(store=> store.childDataReducer)
-    console.log(providerResults)
-    console.log(childServices)
-    console.log(providerResults[1]);
-    
+
     const matches = [];
     // check to see if any of the services match:
     for (let provider of providerResults){
@@ -18,13 +16,12 @@ export default function Results(){
             matches.push(provider);
         }
     }
-    console.log(matches);
+    // console.log(matches);
     return (
-        <>
-            {providerResults.map(provider=> (
-                <p>{provider.name}</p>
+        <div>
+            {matches.map(provider=> (
+                <ProviderItem key={provider.id} provider={provider}/>
             ))}    
-            
-        </>
+        </div>
     )
 }
