@@ -17,3 +17,24 @@
     flex-grow: 5;
     justify-content: center;
 }
+
+.childCards {
+    display: flex;
+}
+
+.childAvatar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.childName {
+    display: flex;
+    justify-content: center;
+}
+
+.childCard {
+    margin-right: 20px;
+    width: 15vw;
+    height: 40vh;
+}

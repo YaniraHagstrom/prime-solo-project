@@ -67,15 +67,17 @@ function UserPage() {
           <div className='childBox'>
             <div className='childCards'>
                 {children.map(child => (
-                  <ChildCard  key={child.id} child={child}/>
+                  <ChildCard className='childCard' key={child.id} child={child}/>
                 ))}
             </div>
             {/* Will need to conditionally render list of children or if no children in list, then have add child button with message */}
             {/* <ChildList /> */}
             {/* When 'Add Child' button is clicked, send to ChildForm component */}
-            {/* <Link to='/addChild'>
-            <Button variant="contained">Add Child</Button>
-            </Link> */}
+            <div>
+            <Link to='/addChild'>
+              <Button variant="contained">Add Child</Button>
+            </Link>
+            </div>
           </div>
         </div>
       </>
