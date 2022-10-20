@@ -6,6 +6,7 @@ import icon from './iconImages/dragonfly.jpg'
 import './userPage.css';
 import ChildForm from '../ChildForm/ChildForm';
 import CreateProfile from './CreateProfile';
+import ChildCard from './ChildCard';
 
 // MUI Imports:
 import Avatar from '@mui/material/Avatar';
@@ -22,11 +23,11 @@ function UserPage() {
     type: 'SAGA_GET_COUNTRIES'
     })
     dispatch({
-      type:'SAGA_GET_CITIES',
-      payload: user.city_id
-      })
+      type: 'SAGA_GET_CHILDREN'
+    })
+    
 },[]) 
-
+  const children = useSelector(store=> store.children);
   const user = useSelector((store) => store.user);
   const countries = useSelector(store => store.countries);
   const cities = useSelector(store=> store.cities);
@@ -38,6 +39,7 @@ function UserPage() {
   //     setCountryName(country.name);
   //   }
   // }
+  console.log(children);
 
 
   return (
@@ -62,13 +64,18 @@ function UserPage() {
 
             {/* <h3>{countryName}</h3> */}
           </div>
-          <div className='otherBox'>
+          <div className='childBox'>
+            <div className='childCards'>
+                {children.map(child => (
+                  <ChildCard  key={child.id} child={child}/>
+                ))}
+            </div>
             {/* Will need to conditionally render list of children or if no children in list, then have add child button with message */}
             {/* <ChildList /> */}
             {/* When 'Add Child' button is clicked, send to ChildForm component */}
-          <Link to='/addChild'>
-          <Button variant="contained">Add Child</Button>
-          </Link>
+            {/* <Link to='/addChild'>
+            <Button variant="contained">Add Child</Button>
+            </Link> */}
           </div>
         </div>
       </>

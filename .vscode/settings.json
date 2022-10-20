@@ -1,6 +1,8 @@
 {
     "editor.fontLigatures": false,
     "editor.quickSuggestions": {
-        "other": "off"
+        "comments": false,
+        "strings": true,
+        // "other": "off"
     }
 }

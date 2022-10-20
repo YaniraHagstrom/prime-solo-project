@@ -1,0 +1,21 @@
+.dropDowns {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.checkBoxes {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 175px;
+    margin-left: 20px;
+}
+
+.ageInput {
+    margin-left: 10px;
+    margin-right: 10px;
+}
