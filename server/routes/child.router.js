@@ -93,7 +93,7 @@ router.get('/:childID', (req, res)=> {
     INNER JOIN 
         children_services
     ON 
-        children.id = children_services.child_id -- may result in duplication
+        children.id = children_services.child_id 
     INNER JOIN
         services
     ON 

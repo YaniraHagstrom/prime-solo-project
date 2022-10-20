@@ -13,6 +13,7 @@ const languagesRouter = require('./routes/languages.router');
 const servicesRouter = require('./routes/services.router');
 const childRouter = require('./routes/child.router');
 const locationRouter = require('./routes/location.router');
+const childrenRouter = require('./routes/children.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/languages', languagesRouter);
 app.use('/api/services', servicesRouter);
 app.use('/api/child', childRouter);
 app.use('/api/location', locationRouter);
+app.use('/api/children', childrenRouter);
 
 // Serve static files
 app.use(express.static('build'));
