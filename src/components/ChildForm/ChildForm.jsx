@@ -68,7 +68,7 @@ export default function ChildForm(){
                 }}
                 >
                 <Paper elevation={3} >
-                    <form >
+                    <form onSubmit={handleSubmit}>
                         <div className='dropDowns'>
                         {/* Child Name input */}
                             <div>
@@ -160,7 +160,7 @@ export default function ChildForm(){
                         ))}
                         </div>
                         <Link to='/results'>
-                            <Button color="success" onClick={handleSubmit} variant="contained" >Add Child and Find Providers</Button>
+                            <Button color="success"  variant="contained" >Add Child and Find Providers</Button>
                         </Link>
                         <Link to='/user'>
                             <Button color="success" variant="contained" >Cancel</Button>

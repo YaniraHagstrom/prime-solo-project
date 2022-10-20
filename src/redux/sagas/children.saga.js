@@ -3,8 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 
 
-function* fetchChildren(action){
-    console.log(action.payload);
+function* fetchChildren(){
     try{ 
         const children = yield axios({
             method: 'GET',

@@ -31,16 +31,6 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   const countries = useSelector(store => store.countries);
   const cities = useSelector(store=> store.cities);
-  // console.log(cities);
-  // const [countryName, setCountryName] = useState(null)
-
-  // for (let country of countries){
-  //   if (country.id === user.country_id){
-  //     setCountryName(country.name);
-  //   }
-  // }
-  console.log(children);
-
 
   return (
     // need to conditional render CreateProfile if there is no country_id && city_id

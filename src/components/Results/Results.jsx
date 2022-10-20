@@ -2,12 +2,16 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function Results(){
-
-    // useEffect({
-        // 1. dispatch to get search results to render:
-    // },[])
+    const dispatch = useDispatch();
+    
+    const providerResults = useSelector(store=> store.results);
 
     return (
-        <p>Results here</p>
+        <>
+            {providerResults.map(provider=> (
+                <p>provider.name</p>
+            ))}    
+            
+        </>
     )
 }

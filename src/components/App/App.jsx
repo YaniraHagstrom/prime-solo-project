@@ -69,6 +69,7 @@ function App() {
           <ProtectedRoute exact path="/results">
             <Results />
           </ProtectedRoute>
+          
 
           <Route exact path="/login">
             {user.id ?
