@@ -17,13 +17,13 @@ import Fab from '@mui/material/Fab';
 export default function ProviderItem({provider}){
     
     const [favorite, setFavorite] = useState(false);
+    const childData = useSelector(store=> store.childData);
 
-    // just sending the URL(string) we chose to display to add to the DB.
-    const addToFavs = ()=>{
-        // dispatch({
-        //     type: 'SAGA_POST_FAV',
-        //     payload: {url: gifUrl}
-        // })
+    const addFavorite = ()=>{
+        dispatch({
+            type: 'SAGA_ADD_FAVORITE',
+            payload: childData.childID
+        })
         setFavorite(true);
     }
 
@@ -42,16 +42,17 @@ export default function ProviderItem({provider}){
                         Mac Miller
                     </Typography>
                     </CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+                    <Box 
+                        sx={{ display: 'flex',alignItems: 'center', pl: 1, pb: 1 }}>
                         {!favorite ? 
                             <Fab size="small" color="secondary" >
                                 <FavoriteIcon 
-                                    onClick={addToFavs}
+                                    onClick={addFavorite}
                                 />
                             </Fab> :
                             <Fab size="small" disabled aria-label="like" >
                                 <FavoriteIcon 
-                                    onClick={addToFavs}
+                                    onClick={addFavorite}
                                 />
                             </Fab>
                         }

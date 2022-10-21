@@ -1,10 +1,10 @@
-const servicesReducer = (state=[], action)=> {
+const favoritesReducer = (state=[], action)=> {
     switch (action.type){
-        case 'SET_SERVICES':
+        case 'SET_FAVORITES':
             return action.payload;
         default:
             return state;
     }
 }
 
-export default servicesReducer;
+export default favoritesReducer;

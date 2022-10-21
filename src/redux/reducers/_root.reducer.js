@@ -8,6 +8,7 @@ import countries from './countries.reducer';
 import cities from './cities.reducer';
 import results from './results.reducer';
 import children from './children.reducer';
+import favorites from './favorites.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   cities,
   results,
   children,
+  favorites,
 });
 
 export default rootReducer;

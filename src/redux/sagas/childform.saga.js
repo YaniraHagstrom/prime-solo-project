@@ -66,6 +66,11 @@ function* searchProviders(action){
             type: 'SET_RESULTS',
             payload: searchResults.data
         })
+        // need to put the child ID in the childData reducer to access for adding provider to favorites table;
+        yield put({
+            type: 'UPDATE_CHILD_DATA',
+            payload: childID
+        })
     }
     catch (error) {
         console.log('Error with adding child:', error);

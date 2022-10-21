@@ -292,5 +292,10 @@ values
 
 
 
+CREATE TABLE favorites (
+	"id" SERIAL PRIMARY KEY,
+	"child_id" INT REFERENCES "children",
+	"provider_id" INT REFERENCES "providers");
+
 
 
