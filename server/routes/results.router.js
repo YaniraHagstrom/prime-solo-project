@@ -64,7 +64,6 @@ router.get('/providers/:childID', (req, res)=> {
     const sqlValues = [userID, childID]
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
-            console.log(dbRes.rows[0]);
             res.send(dbRes.rows);
         })
         .catch(dbErr=> {

@@ -1,5 +1,6 @@
 import './providerItem.css';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // MUI Imports:
 import Card from '@mui/material/Card';
@@ -15,15 +16,15 @@ import Fab from '@mui/material/Fab';
 
 
 export default function ProviderItem({provider}){
-    
+    const dispatch = useDispatch();
     const [favorite, setFavorite] = useState(false);
-    const childData = useSelector(store=> store.childData);
+    const childData = useSelector(store=> store.childDataReducer);
 
     const addFavorite = ()=>{
         dispatch({
             type: 'SAGA_ADD_FAVORITE',
-            payload: childData.childID
-        })
+            payload: {childID: childData.childID, providerID: provider.id}
+            })
         setFavorite(true);
     }
 

@@ -18,7 +18,7 @@ router.get('/countries', (req, res)=> {
 
 router.get('/cities/:id', (req, res)=> {
     const country_id = req.params.id;
-    console.log(country_id);
+    // console.log(country_id);
     const sqlQuery = 
     `SELECT * FROM city
         WHERE country_id = $1
@@ -54,14 +54,5 @@ router.put('/', (req, res)=> {
             console.log('Error in PUT /location', dbErr);
         })
 })
-
-
-// UPDATE students
-//       SET
-//         github_name = $1, 
-//         skill_level = $2
-//       WHERE
-//         id = $3
-
 
 module.exports = router;

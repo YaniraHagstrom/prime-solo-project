@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 router.post('/', (req, res)=> {
     const userID = req.user.id;
     const childData = req.body;
-    console.log(childData);
+    // console.log(childData);
     //{name: '',
     // age: '',
     // primaryLanguage_id: '',
@@ -25,7 +25,7 @@ router.post('/', (req, res)=> {
     // }
 
     const {name, age, primaryLanguage_id, secondaryLanguage_id, services} = childData;
-    console.log('primary:',primaryLanguage_id, 'secondary:', secondaryLanguage_id);
+    // console.log('primary:',primaryLanguage_id, 'secondary:', secondaryLanguage_id);
 
     const serviceId = Object.keys(services);
     const checkedStatus = Object.values(services);
@@ -65,7 +65,7 @@ router.post('/', (req, res)=> {
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
             res.send(dbRes.rows[0]);
-            console.log(dbRes.rows);
+            // console.log(dbRes.rows);
             
         })
         .catch(err=>{

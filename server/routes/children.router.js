@@ -5,7 +5,6 @@ const pool = require('../modules/pool');
 
 
 router.get('/', (req, res)=>{
-    console.log('getting get children request');
     const sqlQuery = 
     `
         SELECT * FROM children

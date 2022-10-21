@@ -3,19 +3,17 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 
 function* addFavorite(action){
-    const childID = action.payload;
+    const ids = action.payload;
+    console.log('ids sent to saga:', ids);
     try{ 
         const favorites = yield axios({
-            method: 'GET',
-            url: `/api/favorites/${childID}`,
-        })
-        yield put({
-            type:'SET_FAVORITES',
-            payload: favorites.data
+            method: 'POST',
+            url: '/api/favorites',
+            data: ids
         })
     }
     catch (error) {
-        console.log('Error getting favorites:', error);
+        console.log('Error posting favorites:', error);
     }
 }
 
