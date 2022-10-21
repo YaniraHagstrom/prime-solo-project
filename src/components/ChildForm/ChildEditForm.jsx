@@ -1,6 +1,7 @@
 import { Link, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 
 import '../UserPage/userPage.css';
 import './childForm.css';
@@ -10,9 +11,10 @@ import { InputLabel, FormControl, Select, MenuItem, Checkbox, FormGroup, FormCon
 
 
 
-export default function ChildForm(){
+export default function ChildEditForm(){
     const dispatch = useDispatch();
     const history = useHistory();
+    const params = useParams();
 
     useEffect(()=>{
         dispatch({
@@ -21,17 +23,25 @@ export default function ChildForm(){
         dispatch({
             type: 'SAGA_FETCH_SERVICES'
         })
-    },[])
+        dispatch({
+            type: 'SAGA_GET_CHILD',
+            payload: params.id
+        })
+    },[params.id])
 
     const languages = useSelector(store=> store.languages);
     const services = useSelector(store=> store.services);
-    // console.log('services:',services); // [{id: 1, name: 'Speech Therapy'},..]
-    // console.log('languages:',languages)
-    
+    const child = useSelector(store=> store.childToEdit);
+    // console.log(child);
     const [childData, setChildData] = useState({name:'', age:'', primaryLanguage_id:'', secondaryLanguage_id:''});
     
-    const [servicesChecked, setServicesChecked] = useState({1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false});
-        
+    const [servicesChecked, setServicesChecked] = useState({1: child[1], 2: child[2], 3: child[3], 4: child[4], 5: child[5], 6: child[6], 7: child[7], 8: child[8], 9: child[9], 10: child[10]});
+    // console.log(servicesChecked);
+
+    
+    // const primaryLanguage = languages[child.primarylanguage_id];
+
+    // // console.log(primaryLanguage.name);
 
 
     const handleSubmit = (e)=> {
@@ -79,8 +89,8 @@ export default function ChildForm(){
                                     className='inputField'
                                     id="standard-basic"
                                     label="Name"
-                                    value={childData.name}
-                                    onChange={e => setChildData({...childData, name: e.target.value})}/>
+                                    value={child.name}
+                                    onChange={(e)=> dispatch({type:'SET_NAME', payload: e.target.value})}/>
                             </div>
                             {/* Age */}
                             <div className='ageInput'>
@@ -90,8 +100,8 @@ export default function ChildForm(){
                                     id="filled-basic"
                                     variant="standard"
                                     label="Age"
-                                    value={childData.age}
-                                    onChange={e => setChildData({...childData, age: e.target.value})}
+                                    value={child.age}
+                                    onChange={(e)=> dispatch({type:'SET_AGE', payload: e.target.value})}
                                 />
                             </div>
 
@@ -100,10 +110,11 @@ export default function ChildForm(){
                             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                                 <InputLabel>Primary Language</InputLabel>
                                 <Select
+                                // defaultValue={primaryLanguage.name}
                                 id="demo-simple-select-filled"
-                                value={childData.primaryLanguage_id}
+                                value={child.primarylanguage_id}
                                 label='test'
-                                onChange={e => setChildData({...childData, primaryLanguage_id: e.target.value})}
+                                onChange={(e)=> dispatch({type:'SET_LANGUAGE1', payload: e.target.value})}
                                 >
                                     {languages.map( language => (
                                         <MenuItem key={language.id} value={language.id}>{language.name}</MenuItem>
@@ -118,9 +129,9 @@ export default function ChildForm(){
                                 <InputLabel id="demo-simple-select-filled-label">Secondary Language</InputLabel>
                                 <Select
                                 id="demo-simple-select-filled"
-                                value={childData.secondaryLanguage_id}
+                                value={child.secondarylanguage_id}
                                 label='test'
-                                onChange={e => setChildData({...childData, secondaryLanguage_id: e.target.value})}
+                                onChange={(e)=> dispatch({type:'SET_LANGUAGE2', payload: e.target.value})}
                                 >
                                     {languages.map( language => (
                                         <MenuItem key={language.id} value={language.id}>{language.name}</MenuItem>
@@ -149,11 +160,12 @@ export default function ChildForm(){
                                         // console.log(servicesChecked.taco[service.id]); //false
                                         const serviceId = service.id;
                                         if (!servicesChecked[serviceId]){
-                                            
+                                            dispatch({type:`SET_CHECKED${service.id}`, payload: true})
                                             setServicesChecked({...servicesChecked, [serviceId]: true})
                                         }
                                         else{
-                                            setServicesChecked({...servicesChecked, [serviceId]: false});
+                                            setServicesChecked({...servicesChecked, [serviceId]: false})
+                                            dispatch({type:'SET_CHECKED', payload: false})
                                         }
                                     }}
                                     />} 
@@ -161,11 +173,10 @@ export default function ChildForm(){
                             />
                         ))}
                         </div>
-                        <Button color="success"  variant="contained" type="submit">Add Child and Find Providers </Button>
+                        <Button color="success"  variant="contained" type="submit">Update and Search</Button>
                         <Link to='/user'>
                             <Button color="success" variant="contained" >Cancel</Button>
                         </Link>
-                        
                     </form>
                 </Paper>
             </Box>

@@ -64,7 +64,7 @@ function UserPage() {
             {/* <ChildList /> */}
             {/* When 'Add Child' button is clicked, send to ChildForm component */}
             <div>
-            <Link to='/addChild'>
+            <Link to='/childform'>
               <Button variant="contained">Add Child</Button>
             </Link>
             </div>

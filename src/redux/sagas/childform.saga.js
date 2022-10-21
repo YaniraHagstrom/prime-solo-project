@@ -60,7 +60,7 @@ function* searchProviders(action){
     try{ 
         const searchResults = yield axios({
             method: 'GET',
-            url: `/api/child/${childID}`
+            url: `/api/child/search/${childID}`
         })
         yield put({
             type: 'SET_RESULTS',

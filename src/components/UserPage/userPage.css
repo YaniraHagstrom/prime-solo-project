@@ -11,6 +11,12 @@
 /* Avatar {
     align-self: flex-start;
 } */
+.createProfile {
+    display: flex;
+    height: 50vh;
+    width: 50vw;
+    justify-content: center;
+}
 
 .childBox {
     display: flex;

@@ -6,8 +6,6 @@ const router = express.Router();
 router.post('/', (req, res) => {    
     const childID = req.body.childID;
     const providerID = req.body.providerID;
-    console.log(req.body)
-    console.log('favorites id data:',req.body.childID);
     const sqlQuery =
     `
     INSERT INTO favorites ("child_id", "provider_id")
@@ -19,7 +17,6 @@ router.post('/', (req, res) => {
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
             res.sendStatus(200);
-            console.log('posted')
         })
         .catch(error => {
             res.sendStatus(500);
@@ -29,8 +26,28 @@ router.post('/', (req, res) => {
 });
 
 
-router.get('/', (req, res) => {
-  // GET route code here
+router.get('/:childID', (req, res) => {
+    const childID = req.params.childID;
+    console.log(req.params);
+    const sqlQuery = 
+    `
+    SELECT * FROM providers
+        INNER JOIN favorites    
+                ON providers.id = favorites.provider_id
+        WHERE favorites.child_id = $1;
+    `
+
+    const sqlValues = [childID]
+
+    pool.query(sqlQuery, sqlValues)
+        .then(dbRes => {
+            res.send(dbRes.rows);
+            console.log(dbRes.rows);
+        })
+        .catch(error => {
+            res.sendStatus(500);
+            console.log('error in GET /favorites:',error);
+        })
 });
 
 

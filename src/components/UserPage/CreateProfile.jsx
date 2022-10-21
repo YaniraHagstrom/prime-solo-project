@@ -61,7 +61,7 @@ export default function CreateProfile(){
     }
 
     return(
-        <>
+        <div className='createProfile'>
             <div className='container'>
                 <div className="userBox">
                 <Avatar 
@@ -104,6 +104,6 @@ export default function CreateProfile(){
                 </FormControl>
                     <Button variant="contained" type="submit" >Submit</Button>
             </form>
-        </>
+        </div>
     )
 }

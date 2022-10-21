@@ -1,7 +1,7 @@
+-- DROP TABLE IF EXISTS favorites;
 -- DROP TABLE IF EXISTS children_languages;
 -- DROP TABLE IF EXISTS children_services;
 -- DROP TABLE IF EXISTS providers_services;
--- DROP TABLE IF EXISTS providers_languages;
 -- DROP TABLE IF EXISTS languages;
 -- DROP TABLE IF EXISTS services;
 -- DROP TABLE IF EXISTS children;
@@ -84,6 +84,8 @@ CREATE TABLE children (
 	"name" VARCHAR(50) NOT NULL,
 	"icon" VARCHAR(250),
 	"age" INT NOT NULL,
+	"primarylanguage_id" INT NOT NULL,
+	"secondarylanguage_id" INT,
 	"user_id" INT REFERENCES "user"
 	);
 	
@@ -148,11 +150,11 @@ VALUES
 	('Spanish'),
 	('Swedish');
 	
-CREATE TABLE children_languages (
-	"id" SERIAL PRIMARY KEY,
-	"child_id" INT REFERENCES "children",
-	"language_id" INT REFERENCES "languages"
-	);
+-- CREATE TABLE children_languages (
+-- 	"id" SERIAL PRIMARY KEY,
+-- 	"child_id" INT REFERENCES "children",
+-- 	"language_id" INT REFERENCES "languages"
+-- 	);
 	
 CREATE TABLE providers (
 	"id" SERIAL PRIMARY KEY,

@@ -35,15 +35,9 @@ router.post('/', (req, res)=> {
 
     const sqlQuery =`
         WITH ins1 AS (
-            INSERT INTO children ("name", age, user_id)
-                VALUES ($1, $2, $3)
+            INSERT INTO children ("name", age, primarylanguage_id, secondarylanguage_id, user_id)
+                VALUES ($1, $2, $3, $4, $5)
                 RETURNING id AS child_id
-            )
-        , ins2 AS(
-            INSERT INTO children_languages (child_id, language_id)
-            VALUES
-            ((SELECT child_id FROM ins1), $4),
-            ((SELECT child_id FROM ins1), $5)
             )
         INSERT INTO children_services (child_id, service_id, checked)
         VALUES
@@ -60,7 +54,7 @@ router.post('/', (req, res)=> {
             RETURNING child_id;
         
     `
-    const sqlValues = [name, age, userID, primaryLanguage_id, secondaryLanguage_id]
+    const sqlValues = [name, age, primaryLanguage_id, secondaryLanguage_id, userID]
 
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
@@ -74,9 +68,38 @@ router.post('/', (req, res)=> {
         })
 })
 
+// This GET if for individual child data for editing the form.
+router.get('/:childID', (req, res)=> {
+    const childID = req.params.childID;
+    const sqlQuery = 
+    `
+    SELECT * FROM children 
+	INNER JOIN (
+	SELECT *
+	FROM   crosstab(
+        'SELECT child_id, service_id, checked
+        FROM   children_services'
+        ) AS checked (child_id INT, "1" BOOLEAN, "2" BOOLEAN, "3" BOOLEAN, "4" BOOLEAN, "5" BOOLEAN, "6" BOOLEAN, "7" BOOLEAN, "8" BOOLEAN, "9" BOOLEAN, "10" BOOLEAN)
+        ) AS foo
+        ON children.id = foo.child_id
+        WHERE children.id = $1;
+    `
+    const sqlValues=[childID]
+    pool.query(sqlQuery, sqlValues)
+        .then(dbRes => {
+            res.send(dbRes.rows);
+        })
+        .catch(dbErr=> {
+            res.sendStatus(500)
+            console.log('Error in GET /child/:childID', dbErr);
+        })
+})
+
+
+
 // GET route to search for providers that match the child search criteria.
 
-router.get('/:childID', (req, res)=> {
+router.get('/search/:childID', (req, res)=> {
     // ex req.params{ childID: '4' }
     const childID = req.params.childID;
     const userID = req.user.id;
@@ -106,13 +129,9 @@ router.get('/:childID', (req, res)=> {
         providers
     ON 
         providers_services.provider_id = providers.id
-    INNER JOIN
-        children_languages
-    ON 
-        children.id = children_languages.child_id
     WHERE 
         "user".id = $1 AND children.id = $2 
-        AND (providers.language_id1 = children_languages.language_id OR providers.language_id2 = children_languages.language_id);
+        AND (providers.language_id1 = children.primarylanguage_id OR providers.language_id2 = children.secondarylanguage_id OR providers.language_id2 = children.primarylanguage_id OR providers.language_id1 = children.secondarylanguage_id);
     `
 
     const sqlValues = [userID, childID]
@@ -121,7 +140,8 @@ router.get('/:childID', (req, res)=> {
             res.send(dbRes.rows);
         })
         .catch(dbErr=> {
-            res.send('Error in GET /child/:childID', dbErr);
+            res.sendStatus(500);
+            console.log('Error in GET /child/search/:childID', dbErr);
         })
 })
 
