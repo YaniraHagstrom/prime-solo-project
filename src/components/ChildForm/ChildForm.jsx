@@ -52,7 +52,7 @@ export default function ChildForm(){
             type: 'SET_CHILD',
             payload: servicesChecked
         })
-        history.push("/results");
+        history.push(`/results/childID`);
     }
 
     return(

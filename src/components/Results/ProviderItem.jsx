@@ -17,24 +17,28 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 
-export default function ProviderItem({provider, favored}){
+export default function ProviderItem({provider, favored, childID}){
     const dispatch = useDispatch();
     const [favorite, setFavorite] = useState(false);
-    const childData = useSelector(store=> store.childDataReducer);
-
+    const favorites = useSelector(store=> store.favorites);
+    // console.log(favorites);
+    console.log(provider);
     const addFavorite = ()=>{
+        // console.log(provider.child_id)
         dispatch({
             type: 'SAGA_ADD_FAVORITE',
-            payload: {childID: childData.childID, providerID: provider.id}
+            payload: {childID: provider.child_id, providerID: provider.id}
             })
         setFavorite(true);
     }
-
+    
     const deleteFavorite=()=> {
-        console.log(childData.childID);
+        // console.log(provider.id);
+        console.log(provider.child_id)
+
         dispatch({
             type: 'SAGA_DELETE_FAVORITE',
-            payload: {provider_id: provider.id, child_id: childData.childID}
+            payload: {provider_id: provider.provider_id, child_id:provider.child_id }
         })
     }
 
@@ -52,7 +56,7 @@ export default function ProviderItem({provider, favored}){
                         {provider.name}
                     </Typography>
                     <Typography variant="subtitle1" color="text.secondary" component="div">
-                        Mac Miller
+                        {provider.first_name} {provider.last_name}
                     </Typography>
                     </CardContent>
                     { favored ? 

@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 
 router.get('/:childID', (req, res) => {
     const childID = req.params.childID;
-    console.log(req.params);
+    // console.log(req.params);
     const sqlQuery = 
     `
     SELECT * FROM providers
@@ -42,11 +42,34 @@ router.get('/:childID', (req, res) => {
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
             res.send(dbRes.rows);
-            console.log(dbRes.rows);
+            // console.log(dbRes.rows);
         })
         .catch(error => {
             res.sendStatus(500);
             console.log('error in GET /favorites:',error);
+        })
+});
+
+router.delete('/:id', (req, res)=> {
+    console.log(req.body);
+    const childID = req.params.id;
+    const providerID = req.body.providerID;
+    console.log(childID);
+
+    const sqlQuery=
+    `
+    DELETE FROM favorites
+        WHERE provider_id = $1 AND child_id = $2;
+    `
+    const sqlValues = [providerID, childID]
+
+    pool.query(sqlQuery, sqlValues)
+        .then(dbRes => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            res.sendStatus(500);
+            console.log('error in DELETE /favorites:',error);
         })
 });
 

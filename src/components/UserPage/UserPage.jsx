@@ -39,9 +39,9 @@ function UserPage() {
       <CreateProfile/>
       :
       <>
-        <header>
+        {/* <header>
           <Link to='/home'>Logout</Link>
-        </header>
+        </header> */}
         <div className='container'>
           <div className="userBox">
             <Avatar 

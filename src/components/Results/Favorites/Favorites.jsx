@@ -21,8 +21,8 @@ export default function Favorites(){
         <div>
             <h2></h2>
             {favorites.map(provider=> (
-                <ProviderItem key={provider.id} provider={provider} favored={true}/>
+                <ProviderItem key={provider.id} provider={provider} favored={true} childID={params.id}/>
             ))}    
         </div>
     )
-}
+}   

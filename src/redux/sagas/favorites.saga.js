@@ -11,6 +11,10 @@ function* addFavorite(action){
             url: '/api/favorites',
             data: ids
         })
+        yield put({
+            type: 'SAGA_FETCH_FAVORITES',
+            payload: action.payload.childID
+        })
     }
     catch (error) {
         console.log('Error posting favorite:', error);
@@ -33,10 +37,30 @@ function* fetchFavorites(action){
     catch (error) {
         console.log('Error getting favorites:', error);
     }
+    
 }
 
 function* deleteFavorite(action){
-    
+    // console.log(action.payload)
+    const childID = action.payload.child_id;
+    const providerID = action.payload.provider_id
+    // console.log(childID, providerID)
+    try{ 
+        const favoriteToDelete = yield axios({
+            method: 'DELETE',
+            url: `/api/favorites/${childID}`,
+            data: {providerID}})
+        // yield put({
+        //     type: 'SAGA_CLEAR_FAVORITES'
+        // })
+        yield put({
+            type:'SAGA_FETCH_FAVORITES',
+            payload: childID
+        })
+    }
+    catch (error) {
+        console.log('Error getting favorites:', error);
+    }
 }
 
 function* favoritesSaga(){

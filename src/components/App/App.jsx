@@ -72,7 +72,7 @@ function App() {
             <ChildEditForm />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/results">
+          <ProtectedRoute exact path="/results/:id">
             <Results />
           </ProtectedRoute>
           
