@@ -52,23 +52,24 @@ router.get('/providers/:childID', (req, res)=> {
         })
     })
 
-    router.get('/services/:childID', (req, res)=> {
-    // ex req.params{ childID: '4' }
-    const childID = req.params.childID;
-    const userID = req.user.id;
-    const sqlQuery =
-    `
+//     router.get('/services/:childID', (req, res)=> {
+//     // ex req.params{ childID: '4' }
+//     const childID = req.params.childID;
+//     const userID = req.user.id;
+//     const sqlQuery =
+//     `
+//     UPDATE 
     
-    ` 
+//     ` 
     
 
-    const sqlValues = [userID, childID]
-    pool.query(sqlQuery, sqlValues)
-        .then(dbRes => {
-            res.send(dbRes.rows);
-        })
-        .catch(dbErr=> {
-            res.send('Error in GET /child/:childID', dbErr);
-        })
-})
+//     const sqlValues = [userID, childID]
+//     pool.query(sqlQuery, sqlValues)
+//         .then(dbRes => {
+//             res.send(dbRes.rows);
+//         })
+//         .catch(dbErr=> {
+//             res.send('Error in GET /child/:childID', dbErr);
+//         })
+// })
 module.exports = router;

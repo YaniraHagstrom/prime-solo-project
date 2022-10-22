@@ -37,11 +37,33 @@ function* fetchChild(action){
     }
 }
 
+function* updateChild(action){
+    const childID = action.payload.child_id;
+    try{ 
+        const childToUpdate = yield axios({
+            method: 'PUT',
+            url: `api/child/${childID}`,
+            data: action.payload
+        })
+        // yield console.log('child data:',child.data[0]);
+        yield put({
+            type:'SAGA_GET_RESULTS',
+            payload: childID
+        })
+    }
+    catch (error) {
+        console.log('Error getting child:', error);
+    }
+}
+
+
 
 
 function* childrenSaga(){
     yield takeLatest('SAGA_GET_CHILDREN', fetchChildren),
-    yield takeLatest('SAGA_GET_CHILD', fetchChild);
+    yield takeLatest('SAGA_FETCH_CHILD', fetchChild),
+    yield takeLatest('SAGA_UPDATE_CHILD', updateChild)
+    ;
 }
 
 export default childrenSaga;

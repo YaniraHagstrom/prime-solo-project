@@ -5,33 +5,11 @@ const pool = require('../modules/pool');
 
 router.post('/', (req, res)=> {
     const userID = req.user.id;
-    const childData = req.body;
-    // console.log(childData);
-    //{name: '',
-    // age: '',
-    // primaryLanguage_id: '',
-    // secondaryLanguage_id: '',
-    // services: {
-    //     '1': false,
-    //     '2': true,
-    //     '3': false,
-    //     '4': false,
-    //     '5': false,
-    //     '6': false,
-    //     '7': false,
-    //     '8': false,
-    //     '9': true,
-    //     '10': false
-    // }
+    const newChild = req.body;
 
-    const {name, age, primaryLanguage_id, secondaryLanguage_id, services} = childData;
-    // console.log('primary:',primaryLanguage_id, 'secondary:', secondaryLanguage_id);
+    const {name, age, primaryLanguage_id, secondaryLanguage_id, services} = newChild;
 
-    const serviceId = Object.keys(services);
-    const checkedStatus = Object.values(services);
-    // console.log('testing indexes',serviceId[0],checkedStatus[0]);
-
-    // console.log('received GET to add child for testing results page');
+    
 
     const sqlQuery =`
         WITH ins1 AS (
@@ -41,24 +19,24 @@ router.post('/', (req, res)=> {
             )
         INSERT INTO children_services (child_id, service_id, checked)
         VALUES
-            ((SELECT child_id FROM ins1), ${serviceId[0]}, ${checkedStatus[0]}),
-            ((SELECT child_id FROM ins1), ${serviceId[1]}, ${checkedStatus[1]}),
-            ((SELECT child_id FROM ins1), ${serviceId[2]}, ${checkedStatus[2]}),
-            ((SELECT child_id FROM ins1), ${serviceId[3]}, ${checkedStatus[3]}),
-            ((SELECT child_id FROM ins1), ${serviceId[4]}, ${checkedStatus[4]}),
-            ((SELECT child_id FROM ins1), ${serviceId[5]}, ${checkedStatus[5]}),
-            ((SELECT child_id FROM ins1), ${serviceId[6]}, ${checkedStatus[6]}),
-            ((SELECT child_id FROM ins1), ${serviceId[7]}, ${checkedStatus[7]}),
-            ((SELECT child_id FROM ins1), ${serviceId[8]}, ${checkedStatus[8]}),
-            ((SELECT child_id FROM ins1), ${serviceId[9]}, ${checkedStatus[9]})
+            ((SELECT child_id FROM ins1), $6, $7),
+            ((SELECT child_id FROM ins1), $8, $9),
+            ((SELECT child_id FROM ins1), $10, $11),
+            ((SELECT child_id FROM ins1), $12, $13),
+            ((SELECT child_id FROM ins1), $14, $15),
+            ((SELECT child_id FROM ins1), $16, $17),
+            ((SELECT child_id FROM ins1), $18, $19),
+            ((SELECT child_id FROM ins1), $20, $21),
+            ((SELECT child_id FROM ins1), $22, $23),
+            ((SELECT child_id FROM ins1), $24, $25)
             RETURNING child_id;
         
     `
-    const sqlValues = [name, age, primaryLanguage_id, secondaryLanguage_id, userID]
+    const sqlValues = [name, age, primaryLanguage_id, secondaryLanguage_id, userID, 1, newChild[1], 2, newChild[2], 3, newChild[3], 4, newChild[4], 5, newChild[5], 6, newChild[6], 7, newChild[7], 8, newChild[8], 9, newChild[9], 10, newChild[10]]
 
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
-            res.send(dbRes.rows[0]);
+            res.send(dbRes.rows[0]);// sends back the child_id
             // console.log(dbRes.rows);
             
         })
@@ -92,6 +70,60 @@ router.get('/:childID', (req, res)=> {
         .catch(dbErr=> {
             res.sendStatus(500)
             console.log('Error in GET /child/:childID', dbErr);
+        })
+})
+
+
+// PUT for ChildEditForm:
+router.put('/:childID', (req, res)=> {
+    const connect  = pool.connect();
+    const childID = req.params.childID;
+    const childUpdate = req.body;
+    const {name, age, primarylanguage_id, secondarylanguage_id} =childUpdate;
+    // console.log('testing boolean',typeof childUpdate[10]);
+    // console.log(childUpdate);
+    // const serviceArray = [1,2,3,4,5,6,7,8,9,10]
+    // for (let id of serviceArray){
+    //     if (childUpdate[id] = true) {
+    //         childUpdate[id] = true;
+    //     }
+    //     else{
+    //         childUpdate[id] = false;
+    //     }
+    // }
+    const sqlQuery = 
+    `
+    WITH src1 AS (
+        UPDATE children
+        SET name=$1, age=$2, primarylanguage_id=$3, secondarylanguage_id=$4
+        WHERE id = $5
+    ) 
+    UPDATE children_services AS t set
+        checked = c.checked
+    FROM (VALUES
+        ($6, $7),
+        ($8, $9),
+        ($10, $11),
+        ($12, $13),
+        ($14, $15),
+        ($16, $17),
+        ($18, $19),
+        ($20, $21),
+        ($22, $23),
+        ($24, $25)
+    ) AS c(service_id, checked) 
+    WHERE t.child_id = $5;
+    `
+
+    const sqlValues = [name, Number(age), primarylanguage_id, secondarylanguage_id, Number(childID), 1, childUpdate[1], 2, childUpdate[2], 3, childUpdate[3], 4, childUpdate[4], 5, childUpdate[5], 6, childUpdate[6], 7, childUpdate[7], 8, childUpdate[8], 9, childUpdate[9], 10, childUpdate[10]];
+    // console.log('values', sqlValues)
+    pool.query(sqlQuery, sqlValues)
+        .then(dbRes => {
+            res.sendStatus(200);
+        })
+        .catch(dbErr=> {
+            res.sendStatus(500)
+            console.log('Error in PUT /child/:childID', dbErr);
         })
 })
 

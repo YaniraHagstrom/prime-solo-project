@@ -22,7 +22,7 @@ export default function ProviderItem({provider, favored, childID}){
     const [favorite, setFavorite] = useState(false);
     const favorites = useSelector(store=> store.favorites);
     // console.log(favorites);
-    console.log(provider);
+    // console.log(provider);
     const addFavorite = ()=>{
         // console.log(provider.child_id)
         dispatch({

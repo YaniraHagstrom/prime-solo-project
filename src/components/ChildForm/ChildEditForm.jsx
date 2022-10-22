@@ -24,7 +24,7 @@ export default function ChildEditForm(){
             type: 'SAGA_FETCH_SERVICES'
         })
         dispatch({
-            type: 'SAGA_GET_CHILD',
+            type: 'SAGA_FETCH_CHILD',
             payload: params.id
         })
     },[params.id])
@@ -32,37 +32,13 @@ export default function ChildEditForm(){
     const languages = useSelector(store=> store.languages);
     const services = useSelector(store=> store.services);
     const child = useSelector(store=> store.childToEdit);
-    // console.log(child);
-    const [childData, setChildData] = useState({name:'', age:'', primaryLanguage_id:'', secondaryLanguage_id:''});
-    
-    const [servicesChecked, setServicesChecked] = useState({1: child[1], 2: child[2], 3: child[3], 4: child[4], 5: child[5], 6: child[6], 7: child[7], 8: child[8], 9: child[9], 10: child[10]});
-    // console.log(servicesChecked);
+    console.log('child object:',child);
 
-    
-    // const primaryLanguage = languages[child.primarylanguage_id];
-
-    // // console.log(primaryLanguage.name);
-
+    const child_id = Number(params.id);
 
     const handleSubmit = (e)=> {
         e.preventDefault();
-        const servicesObject = {services: servicesChecked}
-        //services:{1: true, 2: false, 3: false,...}
-        console.log(servicesChecked);
-
-        const allChildData = {...childData, ...servicesObject};
-        console.log(allChildData);
-        // dispatch to add data to appropriate tables:
-        dispatch({
-            type: 'SAGA_ADD_CHILD',
-            payload: allChildData
-        })
-        // add child data to reducer to use for filtering through provider results. 
-        dispatch({
-            type: 'SET_CHILD',
-            payload: servicesChecked
-        })
-        history.push("/results");
+        history.push(`/results/${params.id}`);
     }
 
     return(
@@ -152,21 +128,11 @@ export default function ChildEditForm(){
                                 // services = [{id: 1, name: 'Speech Therapy'},..]
 
                                 // servicesChecked = {service: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false}
-                                    checked={servicesChecked[service.id]}
+                                    checked={child[service.id]}
                                     key={service.id}
-                                    value={servicesChecked[service.id]}
+                                    value={child[service.id]}
                                     onChange={()=> {
-                                        // console.log(e.target.value)
-                                        // console.log(servicesChecked.taco[service.id]); //false
-                                        const serviceId = service.id;
-                                        if (!servicesChecked[serviceId]){
-                                            dispatch({type:`SET_CHECKED${service.id}`, payload: true})
-                                            setServicesChecked({...servicesChecked, [serviceId]: true})
-                                        }
-                                        else{
-                                            setServicesChecked({...servicesChecked, [serviceId]: false})
-                                            dispatch({type:'SET_CHECKED', payload: false})
-                                        }
+                                        dispatch({type:`SET_CHECKED${service.id}`, payload: !child[service.id]})
                                     }}
                                     />} 
                             label={service.name} 

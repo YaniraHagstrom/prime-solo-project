@@ -14,6 +14,7 @@ import Avatar from '@mui/material/Avatar';
 
 
 export default function ChildCard({child}){
+    const dispatch = useDispatch();
     const history = useHistory();
 
     return(
@@ -33,7 +34,7 @@ export default function ChildCard({child}){
                 </Typography> */}
             </CardContent>
             <CardActions>
-                <Button color="success" variant="contained" onClick={()=>{history.push(`/childForm/${child.id}`)}}>Edit</Button>
+                <Button color="success" variant="contained" onClick={()=> history.push(`/childForm/${child.id}`)}>Edit</Button>
                 <Button color="success" variant="contained" onClick={()=>{history.push(`/favorites/${child.id}`)}}>Favorites</Button>
             </CardActions>
         </Card>

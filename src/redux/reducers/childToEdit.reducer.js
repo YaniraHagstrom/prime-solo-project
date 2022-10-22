@@ -5,7 +5,7 @@ const childToEdit =(state={}, action)=> {
         case 'SET_NAME':
             return {...state, name: action.payload}
         case 'SET_AGE':
-            return {...state, age: action.payload};
+            return {...state, age: Number(action.payload)};
         case 'SET_LANGUAGE1':
             return {...state, primarylanguage_id: action.payload};
         case 'SET_LANGUAGE2':

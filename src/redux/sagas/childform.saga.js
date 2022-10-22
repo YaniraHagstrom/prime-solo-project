@@ -35,13 +35,14 @@ function* fetchLanguages(){
 
 function* addChild(action){
     const newChildData = action.payload;
-    console.log(newChildData);
+    console.log('newChildData:',newChildData);
     try{ 
         const newChild = yield axios({
             method: 'POST',
             url: '/api/child',
             data: newChildData
         })
+        yield console.log('newChildID:',newChild.data);
         yield put({
             type:'SAGA_GET_RESULTS',
             payload: newChild.data
@@ -73,7 +74,7 @@ function* searchProviders(action){
         })
     }
     catch (error) {
-        console.log('Error with adding child:', error);
+        console.log('Error with updating child:', error);
     }
 }
 
