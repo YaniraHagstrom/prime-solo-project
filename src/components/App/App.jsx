@@ -75,7 +75,11 @@ function App() {
           <ProtectedRoute exact path="/results/:id">
             <Results />
           </ProtectedRoute>
-          
+
+          <ProtectedRoute exact path="/results">
+            <Results />
+          </ProtectedRoute>
+
           <ProtectedRoute exact path="/favorites/:id">
             <Favorites />
           </ProtectedRoute>

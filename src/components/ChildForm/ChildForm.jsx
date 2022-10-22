@@ -43,7 +43,7 @@ export default function ChildForm(){
             type: 'SET_CHILD',
             payload: newChild
         })
-        history.push(`/results/childID`);
+        history.push('/results');
     }
 
     return(

@@ -3,7 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import languages from './languages.reducer';
 import services from './services.reducer';
-import childDataReducer from './childForm.reducer';
+import childReducer from './child.reducer';
 import countries from './countries.reducer';
 import cities from './cities.reducer';
 import results from './results.reducer';
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   languages,
   services,
-  childDataReducer,
+  childReducer,
   countries,
   cities,
   results,

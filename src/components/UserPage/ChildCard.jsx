@@ -16,6 +16,7 @@ import Avatar from '@mui/material/Avatar';
 export default function ChildCard({child}){
     const dispatch = useDispatch();
     const history = useHistory();
+    console.log('child:',child);
 
     return(
         <Card className='childCard' sx={{ maxWidth: 345 }}>

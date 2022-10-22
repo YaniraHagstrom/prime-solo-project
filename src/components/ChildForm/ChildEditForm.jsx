@@ -38,7 +38,12 @@ export default function ChildEditForm(){
 
     const handleSubmit = (e)=> {
         e.preventDefault();
-        history.push(`/results/${params.id}`);
+        // dispatch to update the child data:
+        dispatch({
+            type: 'SAGA_UPDATE_CHILD',
+            payload: child_id
+        })
+        history.push(`/results/${child_id}`);
     }
 
     return(

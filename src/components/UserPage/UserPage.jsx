@@ -23,7 +23,7 @@ function UserPage() {
     type: 'SAGA_GET_COUNTRIES'
     })
     dispatch({
-      type: 'SAGA_GET_CHILDREN'
+      type: 'SAGA_FETCH_CHILDREN'
     })
     
 },[]) 

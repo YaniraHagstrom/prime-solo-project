@@ -33,29 +33,6 @@ function* fetchLanguages(){
     }
 }
 
-function* addChild(action){
-    const newChildData = action.payload;
-    console.log('newChildData:',newChildData);
-    try{ 
-        const newChild = yield axios({
-            method: 'POST',
-            url: '/api/child',
-            data: newChildData
-        })
-        yield console.log('newChildID:',newChild.data);
-        yield put({
-            type:'SAGA_GET_RESULTS',
-            payload: newChild.data
-            // newChild.data looks like:
-            // { child_id: 1 }
-        })
-
-    }
-    catch (error) {
-        console.log('Error with adding child:', error);
-    }
-}
-
 function* searchProviders(action){
     const childID = action.payload.child_id;
     try{ 
@@ -81,7 +58,6 @@ function* searchProviders(action){
 function* childFormSaga(){
     yield takeLatest('SAGA_FETCH_SERVICES', fetchServices),
     yield takeLatest('SAGA_FETCH_LANGUAGES', fetchLanguages)
-    yield takeLatest('SAGA_ADD_CHILD', addChild)
     yield takeLatest('SAGA_GET_RESULTS', searchProviders)
 ;}
 

@@ -1,5 +1,5 @@
 
-const childDataReducer = (state = {}, action)=> {
+const childReducer = (state = {}, action)=> {
     switch (action.type){
         case 'SET_CHILD':
             return action.payload;
@@ -10,4 +10,4 @@ const childDataReducer = (state = {}, action)=> {
     }
 }
 
-export default childDataReducer;
+export default childReducer;
