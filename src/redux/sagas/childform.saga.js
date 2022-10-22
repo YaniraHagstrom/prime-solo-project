@@ -34,24 +34,20 @@ function* fetchLanguages(){
 }
 
 function* searchProviders(action){
-    const childID = action.payload.child_id;
+    const childID = action.payload;
+    console.log(action.payload);
     try{ 
         const searchResults = yield axios({
             method: 'GET',
-            url: `/api/child/search/${childID}`
+            url: `/api/results/${childID}`
         })
         yield put({
             type: 'SET_RESULTS',
             payload: searchResults.data
         })
-        // need to put the child ID in the childData reducer to access for adding provider to favorites table;
-        yield put({
-            type: 'UPDATE_CHILD_DATA',
-            payload: childID
-        })
     }
     catch (error) {
-        console.log('Error with updating child:', error);
+        console.log('Error with searching for providers:', error);
     }
 }
 

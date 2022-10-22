@@ -16,8 +16,15 @@ import Avatar from '@mui/material/Avatar';
 export default function ChildCard({child}){
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log('child:',child);
-
+    
+    // SET childReducer to current child:
+    const handleEditClick = ()=> {
+        dispatch({
+            type: 'SET_CHILD',
+            payload: child
+        })
+        history.push(`/childForm/${child.id}`)
+    }
     return(
         <Card className='childCard' sx={{ maxWidth: 345 }}>
             <div className='childAvatar'>
@@ -35,7 +42,7 @@ export default function ChildCard({child}){
                 </Typography> */}
             </CardContent>
             <CardActions>
-                <Button color="success" variant="contained" onClick={()=> history.push(`/childForm/${child.id}`)}>Edit</Button>
+                <Button color="success" variant="contained" onClick={handleEditClick}>Edit</Button>
                 <Button color="success" variant="contained" onClick={()=>{history.push(`/favorites/${child.id}`)}}>Favorites</Button>
             </CardActions>
         </Card>

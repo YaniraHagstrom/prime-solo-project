@@ -7,7 +7,7 @@ export default function Results(){
     
     const providerResults = useSelector(store=> store.results);
 
-    const childServices = useSelector(store=> store.childDataReducer)
+    const childServices = useSelector(store=> store.childReducer)
 
     const matches = [];
     

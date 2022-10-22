@@ -4,6 +4,7 @@ const pool = require('../modules/pool');
 
 
 router.post('/', (req, res)=> {
+    // console.log('receiving Post Request with this data:',req.body)
     const userID = req.user.id;
     const newChild = req.body;
 
@@ -47,31 +48,31 @@ router.post('/', (req, res)=> {
 })
 
 // This GET if for individual child data for editing the form.
-router.get('/:childID', (req, res)=> {
-    const childID = req.params.childID;
-    const sqlQuery = 
-    `
-    SELECT * FROM children 
-	INNER JOIN (
-	SELECT *
-	FROM   crosstab(
-        'SELECT child_id, service_id, checked
-        FROM   children_services'
-        ) AS checked (child_id INT, "1" BOOLEAN, "2" BOOLEAN, "3" BOOLEAN, "4" BOOLEAN, "5" BOOLEAN, "6" BOOLEAN, "7" BOOLEAN, "8" BOOLEAN, "9" BOOLEAN, "10" BOOLEAN)
-        ) AS foo
-        ON children.id = foo.child_id
-        WHERE children.id = $1;
-    `
-    const sqlValues=[childID]
-    pool.query(sqlQuery, sqlValues)
-        .then(dbRes => {
-            res.send(dbRes.rows);
-        })
-        .catch(dbErr=> {
-            res.sendStatus(500)
-            console.log('Error in GET /child/:childID', dbErr);
-        })
-})
+// router.get('/:childID', (req, res)=> {
+//     const childID = req.params.childID;
+//     const sqlQuery = 
+//     `
+//     SELECT * FROM children 
+// 	INNER JOIN (
+// 	SELECT *
+// 	FROM   crosstab(
+//         'SELECT child_id, service_id, checked
+//         FROM   children_services'
+//         ) AS checked (child_id INT, "1" BOOLEAN, "2" BOOLEAN, "3" BOOLEAN, "4" BOOLEAN, "5" BOOLEAN, "6" BOOLEAN, "7" BOOLEAN, "8" BOOLEAN, "9" BOOLEAN, "10" BOOLEAN)
+//         ) AS foo
+//         ON children.id = foo.child_id
+//         WHERE children.id = $1;
+//     `
+//     const sqlValues=[childID]
+//     pool.query(sqlQuery, sqlValues)
+//         .then(dbRes => {
+//             res.send(dbRes.rows);
+//         })
+//         .catch(dbErr=> {
+//             res.sendStatus(500)
+//             console.log('Error in GET /child/:childID', dbErr);
+//         })
+// })
 
 
 // PUT for ChildEditForm:
@@ -80,43 +81,33 @@ router.put('/:childID', (req, res)=> {
     const childID = req.params.childID;
     const childUpdate = req.body;
     const {name, age, primarylanguage_id, secondarylanguage_id} =childUpdate;
-    // console.log('testing boolean',typeof childUpdate[10]);
-    // console.log(childUpdate);
-    // const serviceArray = [1,2,3,4,5,6,7,8,9,10]
-    // for (let id of serviceArray){
-    //     if (childUpdate[id] = true) {
-    //         childUpdate[id] = true;
-    //     }
-    //     else{
-    //         childUpdate[id] = false;
-    //     }
-    // }
+
     const sqlQuery = 
     `
     WITH src1 AS (
         UPDATE children
-        SET name=$1, age=$2, primarylanguage_id=$3, secondarylanguage_id=$4
+        SET name=$1, age=$2::INT, primarylanguage_id=$3, secondarylanguage_id=$4
         WHERE id = $5
     ) 
     UPDATE children_services AS t set
         checked = c.checked
     FROM (VALUES
-        ($6, $7),
-        ($8, $9),
-        ($10, $11),
-        ($12, $13),
-        ($14, $15),
-        ($16, $17),
-        ($18, $19),
-        ($20, $21),
-        ($22, $23),
-        ($24, $25)
+        ($6, $7::BOOLEAN),
+        ($8, $9::BOOLEAN),
+        ($10, $11::BOOLEAN),
+        ($12, $13::BOOLEAN),
+        ($14, $15::BOOLEAN),
+        ($16, $17::BOOLEAN),
+        ($18, $19::BOOLEAN),
+        ($20, $21::BOOLEAN),
+        ($22, $23::BOOLEAN),
+        ($24, $25::BOOLEAN)
     ) AS c(service_id, checked) 
-    WHERE t.child_id = $5;
+    WHERE t.child_id = $5::INT;
     `
 
     const sqlValues = [name, Number(age), primarylanguage_id, secondarylanguage_id, Number(childID), 1, childUpdate[1], 2, childUpdate[2], 3, childUpdate[3], 4, childUpdate[4], 5, childUpdate[5], 6, childUpdate[6], 7, childUpdate[7], 8, childUpdate[8], 9, childUpdate[9], 10, childUpdate[10]];
-    // console.log('values', sqlValues)
+    console.log('values', sqlValues)
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
             res.sendStatus(200);
@@ -127,56 +118,41 @@ router.put('/:childID', (req, res)=> {
         })
 })
 
+// PUT for ChildEditForm:
+// router.put('/:childID', (req, res)=> {
+//     const connect  = pool.connect();
+//     const childID = req.params.childID;
+//     const childUpdate = req.body;
+//     const {name, age, primarylanguage_id, secondarylanguage_id} =childUpdate;
+//     const checked = true;
+//     console.log()
+//     const sqlQuery = 
+//     `
+//     WITH src1 AS (
+//         UPDATE children
+//         SET name=$1, age=$2::INT, primarylanguage_id=$3, secondarylanguage_id=$4
+//         WHERE id = $5
+//     ) 
+//     UPDATE children_services AS t set
+//         checked = c.checked
+//     FROM (VALUES
+//         ($6, $7::BOOLEAN),
+//         ($8, $9::BOOLEAN)
+//     ) AS c(service_id, checked) 
+//     WHERE t.child_id = $5::INT;
+//     `
 
-
-// GET route to search for providers that match the child search criteria.
-
-router.get('/search/:childID', (req, res)=> {
-    // ex req.params{ childID: '4' }
-    const childID = req.params.childID;
-    const userID = req.user.id;
-    const sqlQuery = 
-    `
-    SELECT
-        DISTINCT providers.id, CONCAT(providers.first_name,' ', providers.last_name) AS name, providers.country_id, providers.city_id, providers.min_age, providers.max_age, providers.icon, providers.language_id1, providers.language_id2, providers_services.provider_id, providers_services."1", providers_services."2", providers_services."3", providers_services."4", providers_services."5", providers_services."6", providers_services."7", providers_services."8", providers_services."9", providers_services."10", children_services.child_id AS child_id
-    FROM
-        children
-    INNER JOIN
-        "user"
-    ON 
-        children.user_id = "user".id
-    INNER JOIN 
-        children_services
-    ON 
-        children.id = children_services.child_id 
-    INNER JOIN
-        services
-    ON 
-        children_services.service_id = services.id
-    INNER JOIN 
-        providers_services
-    ON 
-        services.id = providers_services.provider_id
-    INNER JOIN 
-        providers
-    ON 
-        providers_services.provider_id = providers.id
-    WHERE 
-        "user".id = $1 AND children.id = $2 
-        AND (providers.language_id1 = children.primarylanguage_id OR providers.language_id2 = children.secondarylanguage_id OR providers.language_id2 = children.primarylanguage_id OR providers.language_id1 = children.secondarylanguage_id);
-    `
-
-    const sqlValues = [userID, childID]
-    pool.query(sqlQuery, sqlValues)
-        .then(dbRes => {
-            res.send(dbRes.rows);
-            console.log(dbRes.rows[0]);   
-        })
-        .catch(dbErr=> {
-            res.sendStatus(500);
-            console.log('Error in GET /child/search/:childID', dbErr);
-        })
-})
+//     const sqlValues = [name, age, primarylanguage_id, secondarylanguage_id, childID, 3, checked, 9, checked];
+//     console.log('values', sqlValues)
+//     pool.query(sqlQuery, sqlValues)
+//         .then(dbRes => {
+//             res.sendStatus(200);
+//         })
+//         .catch(dbErr=> {
+//             res.sendStatus(500)
+//             console.log('Error in PUT /child/:childID', dbErr);
+//         })
+// })
 
 
 module.exports = router;

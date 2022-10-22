@@ -31,7 +31,7 @@ export default function ChildEditForm(){
 
     const languages = useSelector(store=> store.languages);
     const services = useSelector(store=> store.services);
-    const child = useSelector(store=> store.childToEdit);
+    const child = useSelector(store=> store.childReducer);
     console.log('child object:',child);
 
     const child_id = Number(params.id);
@@ -41,7 +41,7 @@ export default function ChildEditForm(){
         // dispatch to update the child data:
         dispatch({
             type: 'SAGA_UPDATE_CHILD',
-            payload: child_id
+            payload: child
         })
         history.push(`/results/${child_id}`);
     }

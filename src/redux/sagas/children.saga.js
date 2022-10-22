@@ -52,7 +52,7 @@ function* updateChild(action){
         })
     }
     catch (error) {
-        console.log('Error getting child:', error);
+        console.log('Error updating child:', error);
     }
 }
 
@@ -65,7 +65,13 @@ function* addChild(action){
             url: '/api/child',
             data: newChildData
         })
-        yield console.log('newChildID:',newChild.data);
+        yield console.log('newChildID:',newChild.data.child_id);
+        // need to add the child ID in the childReducer to access for adding provider to favorites table;
+        yield put({
+            type: 'UPDATE_CHILD_DATA',
+            payload: newChild.data.child_id
+                })
+        yield console.log('newChildID:',newChild.data.child_id);
         yield put({
             type:'SAGA_GET_RESULTS',
             payload: newChild.data
