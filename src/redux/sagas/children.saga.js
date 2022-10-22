@@ -48,7 +48,7 @@ function* updateChild(action){
         // yield console.log('child data:',child.data[0]);
         yield put({
             type:'SAGA_GET_RESULTS',
-            payload: childID
+            payload: {child_id: childID}
         })
     }
     catch (error) {

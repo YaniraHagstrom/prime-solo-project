@@ -34,7 +34,7 @@ function* fetchLanguages(){
 }
 
 function* searchProviders(action){
-    const childID = action.payload;
+    const childID = action.payload.child_id;
     console.log(action.payload);
     try{ 
         const searchResults = yield axios({

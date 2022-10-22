@@ -76,56 +76,11 @@ router.post('/', (req, res)=> {
 
 
 // PUT for ChildEditForm:
-router.put('/:childID', (req, res)=> {
-    const connect  = pool.connect();
-    const childID = req.params.childID;
-    const childUpdate = req.body;
-    const {name, age, primarylanguage_id, secondarylanguage_id} =childUpdate;
-
-    const sqlQuery = 
-    `
-    WITH src1 AS (
-        UPDATE children
-        SET name=$1, age=$2::INT, primarylanguage_id=$3, secondarylanguage_id=$4
-        WHERE id = $5
-    ) 
-    UPDATE children_services AS t set
-        checked = c.checked
-    FROM (VALUES
-        ($6, $7::BOOLEAN),
-        ($8, $9::BOOLEAN),
-        ($10, $11::BOOLEAN),
-        ($12, $13::BOOLEAN),
-        ($14, $15::BOOLEAN),
-        ($16, $17::BOOLEAN),
-        ($18, $19::BOOLEAN),
-        ($20, $21::BOOLEAN),
-        ($22, $23::BOOLEAN),
-        ($24, $25::BOOLEAN)
-    ) AS c(service_id, checked) 
-    WHERE t.child_id = $5::INT;
-    `
-
-    const sqlValues = [name, Number(age), primarylanguage_id, secondarylanguage_id, Number(childID), 1, childUpdate[1], 2, childUpdate[2], 3, childUpdate[3], 4, childUpdate[4], 5, childUpdate[5], 6, childUpdate[6], 7, childUpdate[7], 8, childUpdate[8], 9, childUpdate[9], 10, childUpdate[10]];
-    console.log('values', sqlValues)
-    pool.query(sqlQuery, sqlValues)
-        .then(dbRes => {
-            res.sendStatus(200);
-        })
-        .catch(dbErr=> {
-            res.sendStatus(500)
-            console.log('Error in PUT /child/:childID', dbErr);
-        })
-})
-
-// PUT for ChildEditForm:
 // router.put('/:childID', (req, res)=> {
-//     const connect  = pool.connect();
 //     const childID = req.params.childID;
 //     const childUpdate = req.body;
 //     const {name, age, primarylanguage_id, secondarylanguage_id} =childUpdate;
-//     const checked = true;
-//     console.log()
+//     console.log('childUpdate:', childUpdate)
 //     const sqlQuery = 
 //     `
 //     WITH src1 AS (
@@ -137,13 +92,21 @@ router.put('/:childID', (req, res)=> {
 //         checked = c.checked
 //     FROM (VALUES
 //         ($6, $7::BOOLEAN),
-//         ($8, $9::BOOLEAN)
+//         ($8, $9::BOOLEAN),
+//         ($10, $11::BOOLEAN),
+//         ($12, $13::BOOLEAN),
+//         ($14, $15::BOOLEAN),
+//         ($16, $17::BOOLEAN),
+//         ($18, $19::BOOLEAN),
+//         ($20, $21::BOOLEAN),
+//         ($22, $23::BOOLEAN),
+//         ($24, $25::BOOLEAN)
 //     ) AS c(service_id, checked) 
 //     WHERE t.child_id = $5::INT;
 //     `
 
-//     const sqlValues = [name, age, primarylanguage_id, secondarylanguage_id, childID, 3, checked, 9, checked];
-//     console.log('values', sqlValues)
+//     const sqlValues = [name, Number(age), primarylanguage_id, secondarylanguage_id, Number(childID), 1, String(childUpdate[1]), 2, String(childUpdate[2]), 3, String(childUpdate[3]), 4, String(childUpdate[4]), 5, String(childUpdate[5]), 6, String(childUpdate[6]), 7, String(childUpdate[7]), 8, String(childUpdate[8]), 9, String(childUpdate[9]), 10, String(childUpdate[10])];
+//     // console.log('values', sqlValues)
 //     pool.query(sqlQuery, sqlValues)
 //         .then(dbRes => {
 //             res.sendStatus(200);
@@ -153,6 +116,41 @@ router.put('/:childID', (req, res)=> {
 //             console.log('Error in PUT /child/:childID', dbErr);
 //         })
 // })
+
+// PUT for ChildEditForm:
+router.put('/:childID', (req, res)=> {
+    const connect  = pool.connect();
+    const childID = req.params.childID;
+    const childUpdate = req.body;
+    const {name, age, primarylanguage_id, secondarylanguage_id} =childUpdate;
+    const checked = true;
+    console.log()
+    const sqlQuery = 
+    `
+    WITH src1 AS (
+        UPDATE children
+        SET name=$1, age=$2::INT, primarylanguage_id=$3, secondarylanguage_id=$4
+        WHERE id = $5
+    ) 
+    UPDATE children_services AS t set
+        checked = c.checked
+    FROM (VALUES
+        ($6, $7::BOOLEAN)
+    ) AS c(service_id, checked) 
+    WHERE t.child_id = $5::INT;
+    `
+
+    const sqlValues = [name, age, primarylanguage_id, secondarylanguage_id, childID, 3, checked];
+    console.log('values', sqlValues)
+    pool.query(sqlQuery, sqlValues)
+        .then(dbRes => {
+            res.sendStatus(200);
+        })
+        .catch(dbErr=> {
+            res.sendStatus(500)
+            console.log('Error in PUT /child/:childID', dbErr);
+        })
+})
 
 
 module.exports = router;
