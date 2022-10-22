@@ -1,7 +1,7 @@
+-- DROP TABLE IF EXISTS favorites;
 -- DROP TABLE IF EXISTS children_languages;
 -- DROP TABLE IF EXISTS children_services;
 -- DROP TABLE IF EXISTS providers_services;
--- DROP TABLE IF EXISTS providers_languages;
 -- DROP TABLE IF EXISTS languages;
 -- DROP TABLE IF EXISTS services;
 -- DROP TABLE IF EXISTS children;
@@ -10,6 +10,7 @@
 -- DROP TABLE IF EXISTS city;
 -- DROP TABLE IF EXISTS country;
 
+CREATE EXTENSION IF NOT EXISTS tablefunc;
 
 CREATE TABLE country (
 	"id" SERIAL PRIMARY KEY,
@@ -83,6 +84,8 @@ CREATE TABLE children (
 	"name" VARCHAR(50) NOT NULL,
 	"icon" VARCHAR(250),
 	"age" INT NOT NULL,
+	"primarylanguage_id" INT NOT NULL,
+	"secondarylanguage_id" INT,
 	"user_id" INT REFERENCES "user"
 	);
 	
@@ -147,11 +150,11 @@ VALUES
 	('Spanish'),
 	('Swedish');
 	
-CREATE TABLE children_languages (
-	"id" SERIAL PRIMARY KEY,
-	"child_id" INT REFERENCES "children",
-	"language_id" INT REFERENCES "languages"
-	);
+-- CREATE TABLE children_languages (
+-- 	"id" SERIAL PRIMARY KEY,
+-- 	"child_id" INT REFERENCES "children",
+-- 	"language_id" INT REFERENCES "languages"
+-- 	);
 	
 CREATE TABLE providers (
 	"id" SERIAL PRIMARY KEY,
@@ -290,6 +293,11 @@ values
 	
 
 
+
+CREATE TABLE favorites (
+	"id" SERIAL PRIMARY KEY,
+	"child_id" INT REFERENCES "children",
+	"provider_id" INT REFERENCES "providers");
 
 
 

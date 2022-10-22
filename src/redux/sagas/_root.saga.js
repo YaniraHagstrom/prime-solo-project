@@ -4,7 +4,8 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import childFormSaga from './childform.saga';
 import locationSaga from './location.saga';
-import childrenSaga from './children.saga';
+import childrenSaga from './children.saga.js';
+import favoritesSaga from './favorites.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     childFormSaga(),
     locationSaga(),
     childrenSaga(), 
+    favoritesSaga(),
   ]);
 }

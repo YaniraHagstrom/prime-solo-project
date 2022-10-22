@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './userPage.css';
@@ -14,8 +14,17 @@ import Avatar from '@mui/material/Avatar';
 
 
 export default function ChildCard({child}){
-    // const children = useSelector(store=> store.children);
-    // console.log(child);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    
+    // SET childReducer to current child:
+    const handleEditClick = ()=> {
+        dispatch({
+            type: 'SET_CHILD',
+            payload: child
+        })
+        history.push(`/childForm/${child.id}`)
+    }
     return(
         <Card className='childCard' sx={{ maxWidth: 345 }}>
             <div className='childAvatar'>
@@ -33,8 +42,8 @@ export default function ChildCard({child}){
                 </Typography> */}
             </CardContent>
             <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
+                <Button color="success" variant="contained" onClick={handleEditClick}>Edit</Button>
+                <Button color="success" variant="contained" onClick={()=>{history.push(`/favorites/${child.id}`)}}>Favorites</Button>
             </CardActions>
         </Card>
     )

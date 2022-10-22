@@ -18,6 +18,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ChildForm from '../ChildForm/ChildForm';
 import Results from '../Results/Results';
 import CreateProfile from '../UserPage/CreateProfile'
+import ChildEditForm from '../ChildForm/ChildEditForm';
+import Favorites from '../Results/Favorites/Favorites';
 
 import './App.css';
 
@@ -35,7 +37,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -62,12 +64,24 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/addChild">
+          <ProtectedRoute exact path="/childForm">
             <ChildForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/childform/:id">
+            <ChildEditForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/results/:id">
+            <Results />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/results">
             <Results />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/favorites/:id">
+            <Favorites />
           </ProtectedRoute>
 
           <Route exact path="/login">

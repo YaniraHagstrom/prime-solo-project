@@ -4,5 +4,11 @@
         "comments": false,
         "strings": true,
         // "other": "off"
-    }
+    },
+    "cSpell.words": [
+        "primarylanguage",
+        "primarylanguagge",
+        "secondarylangauge",
+        "secondarylanguage"
+    ]
 }

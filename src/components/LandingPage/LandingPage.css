@@ -1,3 +1,9 @@
+.landingPage {
+  background-image: url('../../../public/images/portugal2.jpg');
+  background-size: cover;
+  height: 100vh;
+}
+
 .container {
   display: flex;
   justify-content: center;

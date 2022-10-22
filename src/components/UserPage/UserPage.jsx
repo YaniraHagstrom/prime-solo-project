@@ -23,7 +23,7 @@ function UserPage() {
     type: 'SAGA_GET_COUNTRIES'
     })
     dispatch({
-      type: 'SAGA_GET_CHILDREN'
+      type: 'SAGA_FETCH_CHILDREN'
     })
     
 },[]) 
@@ -31,16 +31,6 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   const countries = useSelector(store => store.countries);
   const cities = useSelector(store=> store.cities);
-  // console.log(cities);
-  // const [countryName, setCountryName] = useState(null)
-
-  // for (let country of countries){
-  //   if (country.id === user.country_id){
-  //     setCountryName(country.name);
-  //   }
-  // }
-  console.log(children);
-
 
   return (
     // need to conditional render CreateProfile if there is no country_id && city_id
@@ -49,9 +39,9 @@ function UserPage() {
       <CreateProfile/>
       :
       <>
-        <header>
+        {/* <header>
           <Link to='/home'>Logout</Link>
-        </header>
+        </header> */}
         <div className='container'>
           <div className="userBox">
             <Avatar 
@@ -74,7 +64,7 @@ function UserPage() {
             {/* <ChildList /> */}
             {/* When 'Add Child' button is clicked, send to ChildForm component */}
             <div>
-            <Link to='/addChild'>
+            <Link to='/childform'>
               <Button variant="contained">Add Child</Button>
             </Link>
             </div>
