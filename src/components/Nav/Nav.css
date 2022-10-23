@@ -1,42 +1,38 @@
 .nav {
-  /* flex box layout */
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  -webkit-appearance: button;
+  border-bottom: 5px rgb(236, 47, 202) solid;
+  
+  height: 60px;
+}
+
+.logo {
+  display: flex;
+  flex-grow: 3;
+  margin-left: 10px;
+}
+.userIcon {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+}
+
+.logo2 {
+  display: flex;
   align-items: center;
-
-  margin: 0 0 30px;
-  background-color: #00acb0;
-  overflow: hidden;
+  justify-content: center;
+  margin-left: 8px;
 }
 
-.nav a {
-  text-decoration: none;
+.blank {
+  flex-grow: 6;
+}
+.avatar {
+  display: flex;
+  flex-grow: .25;
+  margin-top: 10px;
+  justify-content: right;
 }
 
-.nav-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #f2f2f2;
-  padding-left: 10px;
-  margin: 0;
-}
 
-.navLink {
-  display: inline-block;
-  color: #f2f2f2;
-  background-color: #00acb0;
-  text-align: center;
-  padding: 24px 10px;
-  text-decoration: none;
-  font-size: 15px;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
-  border: none;
-  cursor: pointer;
-  outline: 0;
-}
-
-.navLink:hover {
-  background-color: #008183;
-}

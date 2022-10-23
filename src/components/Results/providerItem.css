@@ -1,4 +1,88 @@
-.resultsList {
+.results, .favorites {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    /* width: 70vw; */
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 70px;
+    margin-right: 70px;
 }
+
+.providerCard {
+    display: flex;
+    /* justify-content: center; */
+    width: 50vw;
+    height: 200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 5px;
+    align-items: stretch;
+}
+
+.icons {
+    display: flex;
+    width: 60px;
+}
+
+.icon {
+    display: flex;
+    /* align-self: center; */
+    justify-content: center;
+    align-content: center;
+}
+
+.location {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+.email {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+.languages {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+.services {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-top: 5px;
+    /* height: 24px; */
+}
+
+.dot {
+    font-size: 13px;
+    margin-left: 5px;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
+.providerAvatar {
+    display: flex;
+    margin-left: 10px;
+    /* margin-right: 30px; */
+    flex-grow: 1.5;
+}
+
+.providerText {
+    flex-grow: 5;
+}
+
+
+/* Child Profile Div */
+
+

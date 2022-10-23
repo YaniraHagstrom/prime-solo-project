@@ -35,11 +35,13 @@ router.get('/:childID', (req, res)=> {
     ON 
         providers_services.provider_id = providers.id
     WHERE 
-        "user".id = $1 AND children.id = $2 
-        AND (providers.language_id1 = children.primarylanguage_id OR providers.language_id2 = children.secondarylanguage_id OR providers.language_id2 = children.primarylanguage_id OR providers.language_id1 = children.secondarylanguage_id);
+        "user".id = $1 AND children.id = $2
+        AND (providers.language_id1 = children.primarylanguage_id OR providers.language_id2 = children.secondarylanguage_id OR providers.language_id2 = children.primarylanguage_id OR providers.language_id1 = children.secondarylanguage_id)
+        AND "user".country_id = $3
+        AND "user".city_id = $4;
     `
 
-    const sqlValues = [userID, childID]
+    const sqlValues = [userID, childID, req.user.country_id, req.user.city_id]
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
             res.send(dbRes.rows);

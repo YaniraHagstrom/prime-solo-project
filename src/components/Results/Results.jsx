@@ -1,9 +1,17 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProviderItem from "./ProviderItem";
+import './providerItem.css';
 
 export default function Results(){
     const dispatch = useDispatch();
+    const user = useSelector(store=> store.user);
+    useEffect(()=>{
+        dispatch({
+            type:'SAGA_GET_CITIES',
+            payload: user.country_id
+            })
+    })
     
     const providerResults = useSelector(store=> store.results);
 
@@ -19,7 +27,7 @@ export default function Results(){
     }
     console.log(matches);
     return (
-        <div>
+        <div className="results">
             {matches.map(provider=> (
                 <ProviderItem key={provider.id} provider={provider}/>
             ))}    
