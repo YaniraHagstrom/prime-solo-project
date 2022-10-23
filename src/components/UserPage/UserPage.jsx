@@ -41,7 +41,15 @@ function UserPage() {
         { !user.city_id ? 
           <CreateProfile/>
           :
-          <div >
+          <div className="page">
+            <div className='userProfile'>
+                <Avatar className='userAvatar'
+                    sx={{ width: 125, height: 125 }}
+                    ></Avatar>
+                <h2>{user.username}</h2>
+                <h3>Lisbon, Portugal</h3>
+            </div>
+            <div>
               { !children ?
                 <div className='noChildren'>
                     <img className='childHead' src={childImage}/>
@@ -53,12 +61,21 @@ function UserPage() {
                     </Link>
                 </div>
                 : 
-                <div className='childCards'>
+                <div className='children'>
                     {children.map(child => (
-                      <ChildCard className='childCard' key={child.id} child={child}/>
+                      <ChildCard key={child.id} child={child}/>
                     ))}
-                </div>
+                  <div className='addChild'>
+                  <p> Add Another Child</p>
+                  <Link className='addButton' to='/childform'>
+                    <Fab color="primary" aria-label="add">
+                      <AddIcon />
+                    </Fab>
+                  </Link>
+                  </div>
+            </div>
             }
+            </div>
         </div>
 }
       </div>

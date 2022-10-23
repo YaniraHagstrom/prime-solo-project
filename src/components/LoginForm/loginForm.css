@@ -1,6 +1,6 @@
-.loginBox {
+.formLayout {
     display: flex;
-    flex-wrap: wrap;
+    width: 30vw;
 }
 
 .loginForm {
@@ -10,6 +10,3 @@
     
 }
 
-input {
-    width: 75px;
-}

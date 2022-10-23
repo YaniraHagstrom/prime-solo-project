@@ -159,7 +159,7 @@ export default function ChildForm(){
                         <SearchIcon sx={{ mr: 1 }} />
                         Search
                     </Fab>
-                    <Fab className='searchButton' variant="extended" size="medium" color="primary" aria-label="add"  type='submit'>
+                    <Fab className='searchButton' variant="extended" size="medium" color="primary" aria-label="add"  onClick={()=> history.push('/user')}>
                         <CancelIcon sx={{ mr: 1 }}/>
                         Cancel
                     </Fab>

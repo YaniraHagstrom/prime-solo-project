@@ -10,9 +10,24 @@ export default function Favorites(){
     const favorite = true;
     const dispatch = useDispatch();
     const params = useParams();
+    const user = useSelector(store=> store.user);
     useEffect(()=>{
         dispatch({
             type: 'SAGA_FETCH_FAVORITES',
+            payload: params.id
+        })
+        dispatch({
+            type:'SAGA_GET_CITIES',
+            payload: user.country_id
+            })
+        dispatch({
+            type: 'SAGA_FETCH_LANGUAGES'
+        })
+        dispatch({
+            type: 'SAGA_FETCH_SERVICES'
+        })
+        dispatch({
+            type: 'SAGA_FETCH_CHILD',
             payload: params.id
         })
     },[])

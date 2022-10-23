@@ -70,12 +70,7 @@
     margin-right: 4px;
 }
 
-.providerAvatar {
-    display: flex;
-    margin-left: 10px;
-    /* margin-right: 30px; */
-    flex-grow: 1.5;
-}
+
 
 .providerText {
     flex-grow: 5;
@@ -92,7 +87,7 @@
 }
 
 .childAvatar {
-    margin-top: 100px;
+    margin-top: 25px;
 
 }
 

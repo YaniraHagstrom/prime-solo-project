@@ -32,7 +32,7 @@ export default function ProviderItem({provider, favored, childID}){
     const cities = useSelector(store => store.cities);
     const child = useSelector(store=> store.childReducer);
     const services = useSelector(store=> store.services);
-    
+    console.log(services)
     const deleteFavorite=()=> {
         // console.log(provider.id);
         // console.log(provider.child_id)

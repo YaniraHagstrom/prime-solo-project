@@ -8,8 +8,8 @@ import Paper from '@mui/material/Paper';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-
-import './registerForm.css';
+import { TextField, Fab } from "@mui/material";
+import '../LoginForm/loginForm.css';
 import registerPhoto from './registerPhoto.jpg'
 
 function RegisterForm() {
@@ -31,70 +31,27 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <Box 
-      sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      '& > :not(style)': {
-        m: 10,
-        width: '70vw',
-        height: '70vh',
-      },
-    }}
-    >
-      <Paper elevation={3} >
-        <div className='loginBox'>
-          <Box
-            className='loginPhoto'
-            sx={{
-              '& > :not(style)': { 
-                width: '45vw',
-                height: '70vh',
-              },
-          }}
-          >
-            <img src={registerPhoto} alt="boy with map"></img>
-          </Box>
-          <Box
-          className='loginForm'
-          sx={{
-            '& > :not(style)': {
-              
-              width: '25vw',
-              height: '70vh',
-            },
-            
-          }}
-          noValidate
-          autoComplete="off"
-          >
-          <form className="loginForm" >
-              <InputLabel htmlFor="component-simple">Username</InputLabel>
-              <Input 
-                type="text"
-                id="component-simple" 
-                value={username} 
-                onChange={e => setUsername(e.target.value)} 
+          <div className='formLayout'>
+            <form className="loginForm" onSubmit={registerUser}>
+                <InputLabel htmlFor="component-simple">Username</InputLabel>
+                <TextField
+                  type='text'
+                  value={username}
+                  onChange={e => setUsername(e.target.value)} 
                 />
-              <InputLabel htmlFor="component-simple">Password</InputLabel>
-              <Input 
-                type='password'
-                id="component-simple" 
-                value={password} 
-                onChange={e => setPassword(e.target.value)} 
-              />
-              <Link to='/createProfile'>
-                <Button onClick={registerUser} variant="contained" type="submit">Register</Button>
-              </Link>
-              <p>Already Have An Account? 
-                <Link to='/login'> Login Here</Link>
-              </p>
-          </form>
-          </Box>
-        </div>
-      </Paper> 
-    </Box>
+                <InputLabel sx={{ mt: 2 }} htmlFor="component-simple">Password</InputLabel>
+                <TextField
+                  sx={{ mb: 3 }}
+                  type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)} 
+                />
+                <Fab variant="extended" type="submit">Register</Fab>
+                {/* <p>Already An Account? 
+                  <Button to='/registration'> Register Here</Button>
+                </p> */}
+            </form>
+          </div>
   );
 }
 

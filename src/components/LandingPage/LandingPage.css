@@ -1,18 +1,47 @@
 .landingPage {
-  background-image: url('../../../public/images/portugal2.jpg');
+  /* background-color: black; */
   background-size: cover;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  height: 75vh;
-  align-items: center;
-}
 
 header {
   display: flex;
   justify-content: right;
+  align-self: flex-start ;
   margin-right: 20px;
+  height: 80px
+}
+
+.landingContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.globe {
+  display: flex;
+  width: 60vw;
+  height: 100vh;
+  align-content: left;
+  margin-top: 60px;
+  margin-right: 50px;
+  background-size: cover;
+}
+
+.blurb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20vw;
+  align-content: center;
+  
+}
+
+.globeImage {
+  object-fit: contain;
+  width: 120vw;
+  height: 120vh;
+  align-self: left;
 }

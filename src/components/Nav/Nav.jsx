@@ -21,8 +21,21 @@ function Nav() {
           <p className="nav-title">ECDS Abroad</p>
         </div>
       </div>
-      <div className='blank'></div>
       <div className='avatar'>
+      {/* If a user is logged in, show these links */}
+      {user.id && (
+          <div>
+            {/* <Link className="navLink" to="/info">
+              Info Page
+            </Link> */}
+            <LogOutButton className="navLink" />
+            {/* <Avatar 
+              alt="Dragonfly" 
+              src={icon}
+              sx={{ width: 75, height: 75}} /> */}
+          </div>
+        )}
+
       <Avatar 
               alt="Dragonfly" 
               src={avatar}
@@ -68,8 +81,8 @@ export default Nav;
 //           </div>
 //         )}
 
-//         {/* <Link className="navLink" to="/about">
-//           About
-//         </Link> */}
-//       </div>
-//     </div> */}
+// //         {/* <Link className="navLink" to="/about">
+// //           About
+// //         </Link> */}
+// //       </div>
+// //     </div> */}
