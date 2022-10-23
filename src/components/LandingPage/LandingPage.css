@@ -1,21 +1,6 @@
-.landingPage {
-  /* background-color: black; */
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-
-header {
-  display: flex;
-  justify-content: right;
-  align-self: flex-start ;
-  margin-right: 20px;
-  height: 80px
-}
 
 .landingContainer {
+  background-color: black;
   display: flex;
   flex-direction: row;
 }
@@ -24,24 +9,36 @@ header {
   display: flex;
   width: 60vw;
   height: 100vh;
-  align-content: left;
-  margin-top: 60px;
-  margin-right: 50px;
+  /* align-self: flex-start | left; */
+  margin-top: 20px;
   background-size: cover;
 }
 
-.blurb {
+.formLayout {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 20vw;
   align-content: center;
   
 }
 
 .globeImage {
   object-fit: contain;
-  width: 120vw;
-  height: 120vh;
-  align-self: left;
+  width: 95vw;
+  height: 95vh;
+  align-self: flex-start;
+}
+
+.loginForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.blurb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

@@ -21,21 +21,20 @@ function LandingPage() {
     setLoginForm(false);
     setRegisterForm(false);
   }
-  console.log(loginForm)
+  
 
   return (
-    <div className='landingPage'>
-
-      
       <div className="landingContainer">
         <div className='globe'>
           <img className='globeImage' src={require('./logo.png')}/>
         </div>
         { !loginForm ?
-          <div className='blurb'>
-            <div>
-              <Typography component="div" variant="h4">fun blurb about site</Typography> 
-              <Typography component="div" variant="h9">
+          <div className='formLayout'>
+            <div className='blurb'>
+              <Typography sx={{ color: 'white', textAlign: 'center', mb: 4 }} component="div" variant="h4">
+                ECDS Abroad helps parents find early childhood developmental service providers all across the world. 
+              </Typography> 
+              <Typography sx={{ color: 'white' }} component="div" variant="h6">
                                     {/* 👇 sets loginForm to True => Renders LoginForm */}
               <Button onClick={()=> setLoginForm(!loginForm)}>Login / Register</Button>
               to Find Providers 
@@ -43,27 +42,30 @@ function LandingPage() {
             </div>
           </div>
           : // login or register form?
-          <div className='blurb'>
+          <div className='formLayout'>
             {/* if registerForm is false, then render the login page */}
             { !registerForm ? 
-              <div>
+              <div className='loginForm'>
                 <LoginForm/> 
-                    <Typography component="div" variant="h9">Don't Have An Account? 
+                    <Typography 
+                    sx={{ color: 'white', mt: 2  }} 
+                    component="div" variant="h9">Don't Have An Account? 
                                       {/* 👇 sets registerForm to true => Renders RegisterForm */}
-                      <Button onClick={()=> setRegisterForm(!registerForm)}> Register Here</Button>
+                      <Button onClick={()=> setRegisterForm(!registerForm)}> Register</Button>
                     </Typography>
                 <Button variant="text" onClick={handleClick}>cancel</Button>
               </div>
             :
-              <div>
+              <div className='loginForm'>
                   <RegisterForm/> 
-                  <Typography component="div" variant="h9">Already have an account? 
-                    <Button onClick={()=> setRegisterForm(!registerForm)}> Login Here</Button>
+                  <Typography 
+                  sx={{ color: 'white', mt: 2 }} 
+                  component="div" variant="h9">Already have an account? 
+                    <Button onClick={()=> setRegisterForm(!registerForm)}> Login</Button>
                   </Typography>
                 <Button variant="text" onClick={handleClick}>cancel</Button>
               </div>
             }
-            <header></header>
 
           </div>
         }
@@ -71,7 +73,6 @@ function LandingPage() {
 
         </div>
       </div>
-    </div>
   );
 }
 

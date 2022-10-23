@@ -31,26 +31,26 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-          <div className='formLayout'>
+          <div className='actualForm'>
             <form className="loginForm" onSubmit={registerUser}>
-                <InputLabel htmlFor="component-simple">Username</InputLabel>
                 <TextField
+                  sx={{width: 300, backgroundColor: 'white', borderRadius: 2 }}
+                  label='Username'
                   type='text'
                   value={username}
                   onChange={e => setUsername(e.target.value)} 
                 />
-                <InputLabel sx={{ mt: 2 }} htmlFor="component-simple">Password</InputLabel>
                 <TextField
-                  sx={{ mb: 3 }}
+                  label='Password'
+                  sx={{ mt: 3, mb: 2, width: 300, backgroundColor: 'white', borderRadius: 2 }}
                   type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)} 
                 />
-                <Fab variant="extended" type="submit">Register</Fab>
-                {/* <p>Already An Account? 
-                  <Button to='/registration'> Register Here</Button>
-                </p> */}
-            </form>
+                <Fab 
+                  sx={{width: 250 }}
+                  variant="extended" type="submit">Register</Fab>
+              </form>
           </div>
   );
 }

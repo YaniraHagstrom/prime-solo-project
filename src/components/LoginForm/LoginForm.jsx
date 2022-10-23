@@ -34,25 +34,25 @@ function LoginForm() {
   }; // end login
 
   return (
-          <div className='formLayout'>
+          <div className='actualForm'>
             <form className="loginForm" onSubmit={login}>
-                <InputLabel htmlFor="component-simple">Username</InputLabel>
                 <TextField
+                  sx={{width: 300, backgroundColor: 'white', borderRadius: 2 }}
+                  label='Username'
                   type='text'
                   value={username}
                   onChange={e => setUsername(e.target.value)} 
                 />
-                <InputLabel sx={{ mt: 2 }} htmlFor="component-simple">Password</InputLabel>
                 <TextField
-                  sx={{ mb: 3 }}
+                  label='Password'
+                  sx={{ mt: 3, mb: 2, width: 300, backgroundColor: 'white', borderRadius: 2 }}
                   type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)} 
                 />
-                <Fab variant="extended" type="submit">Login</Fab>
-                {/* <p>Don't Have An Account? 
-                  <Button to='/registration'> Register Here</Button>
-                </p> */}
+                <Fab 
+                  sx={{width: 250 }}
+                  variant="extended" type="submit">Login</Fab>
             </form>
           </div>
   );
