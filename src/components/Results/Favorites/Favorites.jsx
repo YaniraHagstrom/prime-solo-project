@@ -21,13 +21,12 @@ export default function Favorites(){
     const child = useSelector(store=> store.childReducer);
 
     return (
-        <>
-            <div className="childProfile">
-            <div className='childAvatar'>
-                <Avatar
-                    sx={{ width: 100, height: 100 }}
+        <div className="page">
+            <div className='childProfile'>
+                <Avatar className='childAvatar'
+                    sx={{ width: 125, height: 125 }}
                     >{child.name}</Avatar>
-            </div>
+                <h2>{child.name}</h2>
             </div>
             <div className="favorites">
                 <h2>Favorites</h2>
@@ -35,6 +34,6 @@ export default function Favorites(){
                     <ProviderItem key={provider.id} provider={provider} favored={true} childID={params.id}/>
                 ))}    
             </div>
-        </>
+        </div>
     )
 }   

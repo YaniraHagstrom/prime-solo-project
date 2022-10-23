@@ -1,13 +1,12 @@
 .results, .favorites {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 70vw; */
+    width: 70vw;
     flex-direction: column;
     flex-wrap: wrap;
-    margin-left: 70px;
-    margin-right: 70px;
+    /* background-color: rgb(245, 162, 53, .6); */
 }
 
 .providerCard {
@@ -85,4 +84,24 @@
 
 /* Child Profile Div */
 
+.page {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    
+}
 
+.childAvatar {
+    margin-top: 100px;
+
+}
+
+.childProfile {
+    display: inline-flex;
+    flex-direction: column;
+    /* align-content: center; */
+    align-items: center;
+    width: 25vw;
+    -webkit-appearance: button;
+    border-right: 5px rgb(59, 189, 59) dotted;
+}

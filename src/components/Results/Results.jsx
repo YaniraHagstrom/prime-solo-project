@@ -27,10 +27,18 @@ export default function Results(){
     }
     console.log(matches);
     return (
-        <div className="results">
-            {matches.map(provider=> (
-                <ProviderItem key={provider.id} provider={provider}/>
-            ))}    
+        <div className="page">
+            <div className='childProfile'>
+                <Avatar className='childAvatar'
+                    sx={{ width: 125, height: 125 }}
+                    >{child.name}</Avatar>
+                <h2>{child.name}</h2>
+            </div>
+            <div className="results">
+                {matches.map(provider=> (
+                    <ProviderItem key={provider.id} provider={provider}/>
+                ))}    
+            </div>
         </div>
     )
 }

@@ -4,16 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // MUI Imports:
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Fab from '@mui/material/Fab';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
@@ -61,6 +55,7 @@ export default function ProviderItem({provider, favored, childID}){
     for (let service of services){
         servicesObj[service.id] = service.name;
     }
+    console.log(servicesObj)
     // filter out names of services that match:
     const matches = [];    
     // check to see if any of the services match:
@@ -80,7 +75,7 @@ export default function ProviderItem({provider, favored, childID}){
                     <div className='providerAvatar'>
                     <Avatar
                         variant="circle"
-                        sx={{ width: 125, height: 125, marginTop: '16px', ml: '4px' }}
+                        sx={{ width: 100, height: 100, marginTop: '16px', ml: '4px' }}
                         >{provider.name}</Avatar>
                     </div>
                     <div className='providerText'>
