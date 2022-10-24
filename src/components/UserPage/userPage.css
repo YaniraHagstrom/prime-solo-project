@@ -1,12 +1,12 @@
 .noChildren {
-    margin-top: 125px;
-    border-top: 5px orange;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* width: 80vw; */
-    /* border: 5px orange solid; */
+    width: 75vw;
+    height: 60vh;
+    -webkit-appearance: button;
+    /* border: 4px rgb(59, 189, 59, .8) dotted; */
 }
 
 .childHead {
@@ -31,6 +31,7 @@
     /* align-content: center; */
     align-items: center;
     width: 25vw;
+    height: 100vh;
     -webkit-appearance: button;
     border-right: 4px rgb(59, 189, 59, .8) dotted;
 }
@@ -76,6 +77,6 @@
     width: 18vw;
     -webkit-appearance: button;
     border: 4px rgb(59, 189, 59, .8) dotted;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     margin: 20px;
 }

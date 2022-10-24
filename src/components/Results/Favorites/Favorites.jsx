@@ -5,6 +5,7 @@ import '../providerItem.css';
 
 import ProviderItem from "../ProviderItem";
 import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
 export default function Favorites(){
     const favorite = true;
@@ -26,10 +27,10 @@ export default function Favorites(){
         dispatch({
             type: 'SAGA_FETCH_SERVICES'
         })
-        dispatch({
-            type: 'SAGA_FETCH_CHILD',
-            payload: params.id
-        })
+        // dispatch({
+        //     type: 'SAGA_FETCH_CHILD',
+        //     payload: params.id
+        // })
     },[])
 
     const favorites = useSelector(store=> store.favorites);
@@ -40,11 +41,15 @@ export default function Favorites(){
             <div className='childProfile'>
                 <Avatar className='childAvatar'
                     sx={{ width: 125, height: 125 }}
-                    >{child.name}</Avatar>
-                <h2>{child.name}</h2>
+                    ></Avatar>
+                <Typography sx={{textAlign: 'center', mt: 2, mb: 1, fontWeight:'bold'}} component="div" variant="h4">
+                {child.name}
+                </Typography>
             </div>
             <div className="favorites">
-                <h2>Favorites</h2>
+                <Typography sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4 }} component="div" variant="h5">
+                    Favorites
+                </Typography>
                 {favorites.map(provider=> (
                     <ProviderItem key={provider.id} provider={provider} favored={true} childID={params.id}/>
                 ))}    

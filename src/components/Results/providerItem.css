@@ -12,7 +12,7 @@
 .providerCard {
     display: flex;
     /* justify-content: center; */
-    width: 50vw;
+    width: 62vw;
     height: 200px;
     flex-direction: row;
     flex-wrap: wrap;
@@ -21,9 +21,13 @@
     align-items: stretch;
 }
 
+.providerAvatar {
+}
+
 .icons {
     display: flex;
     width: 60px;
+    align-self: right;
 }
 
 .icon {
@@ -31,6 +35,8 @@
     /* align-self: center; */
     justify-content: center;
     align-content: center;
+    align-items: right;
+    flex-grow: 3;
 }
 
 .location {
@@ -73,7 +79,8 @@
 
 
 .providerText {
-    flex-grow: 5;
+    align-items: flex-start;
+    flex-shrink: 2;
 }
 
 
@@ -100,3 +107,31 @@
     -webkit-appearance: button;
     border-right: 5px rgb(59, 189, 59) dotted;
 }
+
+/* .icon {
+    flex-direction: column;
+    flex-grow: 5;
+} */
+
+.notes {
+    height: 145px;
+    width: 196px;
+    -webkit-appearance: button;
+    border: 3px rgb(228, 110, 50, .7) dotted;
+    border-radius: 5px;
+    margin-left: 32px;
+    margin-right: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.icon2 {
+    /* margin-left: 0px; */
+    display: flex;
+    flex-grow: 1;
+    justify-content: right;
+    align-content: right;
+    margin-right: 10px;
+}
+
+

@@ -1,9 +1,15 @@
 import { useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import ProviderItem from "./ProviderItem";
 import './providerItem.css';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import { Fab } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function Results(){
+    const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store=> store.user);
     useEffect(()=>{
@@ -16,6 +22,8 @@ export default function Results(){
     const providerResults = useSelector(store=> store.results);
 
     const childServices = useSelector(store=> store.childReducer)
+
+    const child = useSelector(store=> store.childReducer);
 
     const matches = [];
     
@@ -31,10 +39,19 @@ export default function Results(){
             <div className='childProfile'>
                 <Avatar className='childAvatar'
                     sx={{ width: 125, height: 125 }}
-                    >{child.name}</Avatar>
-                <h2>{child.name}</h2>
+                    ></Avatar>
+                <Typography sx={{textAlign: 'center', mt: 2, mb: 1, fontWeight:'bold'}} component="div" variant="h4">
+                {child.name}
+                </Typography>
+                <Fab className='searchButton'  size="small" variant='extended'color="secondary" aria-label="add"  onClick={()=>{history.push(`/favorites/${child.id}`)}}> 
+                    <FavoriteIcon/>
+                    Favorites
+                </Fab>
             </div>
             <div className="results">
+                <Typography sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4 }} component="div" variant="h5">
+                Matching Providers
+                </Typography>
                 {matches.map(provider=> (
                     <ProviderItem key={provider.id} provider={provider}/>
                 ))}    

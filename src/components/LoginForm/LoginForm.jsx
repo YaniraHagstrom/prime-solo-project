@@ -10,6 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import { TextField, Fab } from "@mui/material";
 import './loginForm.css';
+import Typography from '@mui/material/Typography';
 
 function LoginForm() {
   const [username, setUsername] = useState('');

@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import { InputLabel, FormControl, Select, MenuItem,FormControlLabel } from "@mui/material";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import Typography from '@mui/material/Typography';
 
 
 function UserPage() {
@@ -30,6 +31,7 @@ function UserPage() {
     })
     
 },[]) 
+
   const children = useSelector(store=> store.children);
   const user = useSelector((store) => store.user);
   const countries = useSelector(store => store.countries);
@@ -44,16 +46,22 @@ function UserPage() {
           <div className="page">
             <div className='userProfile'>
                 <Avatar className='userAvatar'
-                    sx={{ width: 125, height: 125 }}
-                    ></Avatar>
-                <h2>{user.username}</h2>
-                <h3>Lisbon, Portugal</h3>
+                    sx={{ width: 125, height: 125 }}>
+                </Avatar>
+                <Typography sx={{textAlign: 'center', mt: 2, mb: 1, fontWeight:'bold'}} component="div" variant="h5">
+                {user.username}
+                </Typography>
+                <Typography sx={{textAlign: 'center'}} component="div" variant="h6">
+                Lisbon, Portugal
+                </Typography>
             </div>
             <div>
               { !children ?
                 <div className='noChildren'>
                     <img className='childHead' src={childImage}/>
-                    <p> Add a child to search for providers</p>
+                    <Typography sx={{textAlign: 'center'}} component="div" variant="h6">
+                    Create a child profile to search for providers
+                    </Typography> 
                     <Link className='addButton' to='/childform'>
                       <Fab color="primary" aria-label="add">
                         <AddIcon />
