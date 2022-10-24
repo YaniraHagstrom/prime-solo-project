@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router';
-import '../providerItem.css';
+import './providerItem.css';
 
-import ProviderItem from "../ProviderItem";
+import ProviderItem from "./ProviderItem";
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
@@ -40,7 +40,8 @@ export default function Favorites(){
         <div className="page">
             <div className='childProfile'>
                 <Avatar className='childAvatar'
-                    sx={{ width: 125, height: 125 }}
+                    src={require('./childAvatar.jpg')}
+                    sx={{ border: 2 ,width: 125, height: 125 }}
                     ></Avatar>
                 <Typography sx={{textAlign: 'center', mt: 2, mb: 1, fontWeight:'bold'}} component="div" variant="h4">
                 {child.name}

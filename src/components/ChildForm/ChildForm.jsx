@@ -67,7 +67,8 @@ export default function ChildForm(){
                     >
                         <Avatar 
                         alt="Dragonfly" 
-                        sx={{ width: 110, height: 110}} 
+                        sx={{ border: 2, width: 130, height: 130}} 
+                        src={require('./childAvatar.jpg')}
                         />
                     </Badge>
                     {/* Child Name input */}

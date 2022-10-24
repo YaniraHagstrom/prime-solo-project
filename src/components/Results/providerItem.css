@@ -12,7 +12,7 @@
 .providerCard {
     display: flex;
     /* justify-content: center; */
-    width: 62vw;
+    width: 55vw;
     height: 200px;
     flex-direction: row;
     flex-wrap: wrap;
@@ -36,7 +36,7 @@
     justify-content: center;
     align-content: center;
     align-items: right;
-    flex-grow: 3;
+    /* flex-grow: 3; */
 }
 
 .location {
@@ -80,7 +80,7 @@
 
 .providerText {
     align-items: flex-start;
-    flex-shrink: 2;
+    width: 300px;
 }
 
 
@@ -119,8 +119,8 @@
     -webkit-appearance: button;
     border: 3px rgb(228, 110, 50, .7) dotted;
     border-radius: 5px;
-    margin-left: 32px;
-    margin-right: 8px;
+    margin-left: 80px;
+    /* margin-right: 8px; */
     display: flex;
     flex-direction: column;
 }

@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Fab } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+// import avatar1 from './avatar1.jpg'
 
 export default function Results(){
     const history = useHistory();
@@ -33,12 +34,16 @@ export default function Results(){
             matches.push(provider);
         }
     }
-    console.log(matches);
+
+    // console.log(matches);
+    const avatars = (1,2,3,4,5,6)
+
     return (
         <div className="page">
             <div className='childProfile'>
                 <Avatar className='childAvatar'
-                    sx={{ width: 125, height: 125 }}
+                    src={require('./childAvatar.jpg')}
+                    sx={{ border: 2 ,width: 125, height: 125 }}
                     ></Avatar>
                 <Typography sx={{textAlign: 'center', mt: 2, mb: 1, fontWeight:'bold'}} component="div" variant="h4">
                 {child.name}

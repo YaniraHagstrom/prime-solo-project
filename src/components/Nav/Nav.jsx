@@ -1,88 +1,61 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
 
 import Avatar from '@mui/material/Avatar';
 import icon from './logo.png';
-import avatar from './dragonfly.jpg'
+import avatar from './dragonfly2.jpg'
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 function Nav() {
+  const history = useHistory();
   const user = useSelector((store) => store.user);
+  const cities = useSelector(store=> store.cities);
 
   return (
+    <>
+    { user.id &&
+    
     <div className="nav">
       <div className='logo'>
         <Link to="/home">
           <img className='userIcon' src={icon}/>
         </Link>
         <div className='logo2'>
-          <p className="nav-title">ECDS Abroad</p>
+        <Typography sx={{ color: 'white', textAlign: 'center', ml: 1}} component="div" variant="h5">
+            ECDS Abroad 
+        </Typography>
         </div>
       </div>
       <div className='avatar'>
-      {/* If a user is logged in, show these links */}
       {user.id && (
-          <div>
-            {/* <Link className="navLink" to="/info">
-              Info Page
-            </Link> */}
+        <>
+          <Button variant="text" onClick={()=> history.push('/about')}>About</Button>
             <LogOutButton className="navLink" />
             {/* <Avatar 
               alt="Dragonfly" 
               src={icon}
               sx={{ width: 75, height: 75}} /> */}
-          </div>
+          { cities ?
+          <Avatar 
+            alt="Dragonfly" 
+            src={avatar}
+            sx={{ width: 40, height: 40, mr: 2}} 
+          />
+          : null
+        }
+        </>
         )}
 
-      <Avatar 
-              alt="Dragonfly" 
-              src={avatar}
-              sx={{ width: 40, height: 40}} 
-      />
       </div>
     </div>
+  }
+  </>
   );
 }
 
 export default Nav;
 
-
-// {/* <div className="nav">
-//       <Link to="/home">
-//         <h2 className="nav-title">ECDS Abroad</h2>
-//       </Link>
-//       <div>
-//         {/* If no user is logged in, show these links */}
-//         {!user.id && (
-//           // If there's no user, show login/registration links
-//           <Link className="navLink" to="/login">
-//             Login / Register
-//           </Link>
-//         )}
-
-//         {/* If a user is logged in, show these links */}
-//         {user.id && (
-//           <div className='avatar'>
-//             <Link className="navLink" to="/user">
-//               Home
-//             </Link>
-
-//             {/* <Link className="navLink" to="/info">
-//               Info Page
-//             </Link> */}
-
-//             <LogOutButton className="navLink" />
-//             <Avatar 
-//               alt="Dragonfly" 
-//               src={icon}
-//               sx={{ width: 75, height: 75}} />
-//           </div>
-//         )}
-
-// //         {/* <Link className="navLink" to="/about">
-// //           About
-// //         </Link> */}
-// //       </div>
-// //     </div> */}

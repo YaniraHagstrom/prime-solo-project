@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import icon from './iconImages/dragonfly.jpg'
+import icon from './iconImages/dragonfly2.jpg'
 import './createProfile.css';
 
 // MUI Imports:
@@ -38,7 +38,8 @@ export default function CreateProfile(){
     const [locationData, setLocationData] = useState({country_id:'', city_id:''});
 
     // console.log('location data:',locationData );
-
+    const [selectedCountry, setSelectedCountry]= useState('');
+    const [selectedCity, setSelectedCity] =useState('')
 
     const handleCountry =(e)=> {
         e.preventDefault();
@@ -74,7 +75,7 @@ export default function CreateProfile(){
                     className='userAvatar'
                     alt="Dragonfly" 
                     src={icon}
-                    sx={{ width: 150, height: 150, mb: 2}} 
+                    sx={{border: 2, width: 150, height: 150, mb: 2}} 
                 />
                 
                 <Typography sx={{ textAlign: 'center', mb: 1}}         component="div" variant="h4">
@@ -116,7 +117,7 @@ export default function CreateProfile(){
                         </FormControl>
                     </div>
                     <Fab 
-                        sx={{width: 250, ml: 8}}
+                        sx={{width: 250, ml: 3, mt: 3}}
                         variant="extended" type="submit">Submit
                     </Fab>
                 </form>

@@ -31,8 +31,8 @@ function LandingPage() {
         { !loginForm ?
           <div className='formLayout'>
             <div className='blurb'>
-              <Typography sx={{ color: 'white', textAlign: 'center', mb: 4 }} component="div" variant="h4">
-                ECDS Abroad helps expat parents find early childhood developmental service providers all around the world. 
+              <Typography sx={{ textTransform:'capitalize' ,color: 'white', textAlign: 'center', mb: 4, ml: 1 }} component="div" variant="h4">
+                ECDS Abroad helps parents find early childhood developmental services around the world. 
               </Typography> 
               <Typography sx={{ color: 'white' }} component="div" variant="h6">
                                     {/* 👇 sets loginForm to True => Renders LoginForm */}

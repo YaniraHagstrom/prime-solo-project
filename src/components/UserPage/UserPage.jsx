@@ -45,8 +45,10 @@ function UserPage() {
           :
           <div className="page">
             <div className='userProfile'>
-                <Avatar className='userAvatar'
-                    sx={{ width: 125, height: 125 }}>
+                <Avatar 
+                    src={require('./iconImages/dragonfly2.jpg')}
+                    className='userAvatar2'
+                    sx={{ border:2, width: 125, height: 125 }}>
                 </Avatar>
                 <Typography sx={{textAlign: 'center', mt: 2, mb: 1, fontWeight:'bold'}} component="div" variant="h5">
                 {user.username}
@@ -56,9 +58,9 @@ function UserPage() {
                 </Typography>
             </div>
             <div>
-              { !children ?
+              { children ?
                 <div className='noChildren'>
-                    <img className='childHead' src={childImage}/>
+                    {/* <img className='childHead' src={childImage}/> */}
                     <Typography sx={{textAlign: 'center'}} component="div" variant="h6">
                     Create a child profile to search for providers
                     </Typography> 

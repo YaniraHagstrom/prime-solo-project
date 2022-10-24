@@ -19,7 +19,7 @@ import ChildForm from '../ChildForm/ChildForm';
 import Results from '../Results/Results';
 import CreateProfile from '../UserPage/CreateProfile'
 import ChildEditForm from '../ChildForm/ChildEditForm';
-import Favorites from '../Results/Favorites/Favorites';
+import Favorites from '../Results/Favorites';
 
 import './App.css';
 

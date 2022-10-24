@@ -14,6 +14,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
+import avatar1 from './avatar1.jpg'
 
 export default function ProviderItem({provider, favored, childID}){
     const dispatch = useDispatch();
@@ -73,13 +74,13 @@ export default function ProviderItem({provider, favored, childID}){
 
     const grow1= {'flexGrow': 0};
     if (favorite){
-        grow1['flexGrow'] = 2;
+        grow1['flexGrow'] = 0;
     }
     // const grow2= {'flexGrow': 0};
     // if (favorite){
     //     grow2['flexGrow'] = 2;
     // }
-
+    console.log(typeof provider.icon)
     return(
         
         <div >
@@ -87,11 +88,12 @@ export default function ProviderItem({provider, favored, childID}){
             <Card sx={{ display: 'flex'}} className='providerCard'>
                     <div className='providerAvatar'>
                     <Avatar
+                        src={require(`${provider.icon}`)}
                         variant="circle"
                         sx={{ width: 100, height: 100, marginTop: '16px', ml: 2, mr: 4 }}
                         ></Avatar>
                     </div>
-                    <Box className='providerText' sx={grow1}>
+                    <Box className='providerText' >
                         <Typography component="div" variant="h6"
                             sx={{ mt: '12px',fontWeight:'bold' }}>
                             {provider.first_name}{' '}{provider.last_name}
@@ -124,7 +126,7 @@ export default function ProviderItem({provider, favored, childID}){
                         <div className='icon'>
                             { edit ? 
                             <TextField
-                            sx={{ display: 'flex',width: 200, ml: 4, mr:1}}
+                            sx={{ display: 'flex',width: 210, ml: 4, mr:1}}
                             id="outlined-multiline-static"
                             label="notes"
                             multiline

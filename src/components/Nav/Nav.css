@@ -1,10 +1,10 @@
 .nav {
+  background-color: black;
   display: flex;
   flex-direction: row;
   -webkit-appearance: button;
   border-bottom: 12px rgb(236, 47, 202, .8) solid;
-  
-  height: 60px;
+  height: 70px;
 }
 
 .logo {
@@ -31,8 +31,8 @@
 .avatar {
   display: flex;
   flex-grow: .25;
-  margin-top: 10px;
   justify-content: right;
+  align-items: center;
 }
 
 
