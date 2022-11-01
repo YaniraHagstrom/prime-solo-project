@@ -11,7 +11,7 @@ router.get('/:childID', (req, res)=> {
     const sqlQuery = 
     `
     SELECT
-        DISTINCT providers.id, CONCAT(providers.first_name,' ', providers.last_name) AS name, providers.country_id, providers.city_id, providers.min_age, providers.max_age, providers.icon, providers.language_id1, providers.language_id2, providers_services.provider_id, providers_services."1", providers_services."2", providers_services."3", providers_services."4", providers_services."5", providers_services."6", providers_services."7", providers_services."8", providers_services."9", providers_services."10", children_services.child_id AS child_id
+        DISTINCT providers.id, providers.first_name,providers.last_name, providers.country_id, providers.city_id, providers.min_age, providers.max_age, providers.icon, providers.language_id1, providers.language_id2, providers_services.provider_id, providers_services."1", providers_services."2", providers_services."3", providers_services."4", providers_services."5", providers_services."6", providers_services."7", providers_services."8", providers_services."9", providers_services."10", children_services.child_id AS child_id
     FROM
         children
     INNER JOIN
@@ -35,11 +35,13 @@ router.get('/:childID', (req, res)=> {
     ON 
         providers_services.provider_id = providers.id
     WHERE 
-        "user".id = $1 AND children.id = $2 
-        AND (providers.language_id1 = children.primarylanguage_id OR providers.language_id2 = children.secondarylanguage_id OR providers.language_id2 = children.primarylanguage_id OR providers.language_id1 = children.secondarylanguage_id);
+        "user".id = $1 AND children.id = $2
+        AND (providers.language_id1 = children.primarylanguage_id OR providers.language_id2 = children.secondarylanguage_id OR providers.language_id2 = children.primarylanguage_id OR providers.language_id1 = children.secondarylanguage_id)
+        AND "user".country_id = $3
+        AND "user".city_id = $4;
     `
 
-    const sqlValues = [userID, childID]
+    const sqlValues = [userID, childID, req.user.country_id, req.user.city_id]
     pool.query(sqlQuery, sqlValues)
         .then(dbRes => {
             res.send(dbRes.rows);

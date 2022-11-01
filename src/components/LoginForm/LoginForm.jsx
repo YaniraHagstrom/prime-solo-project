@@ -8,9 +8,9 @@ import Paper from '@mui/material/Paper';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-
+import { TextField, Fab } from "@mui/material";
 import './loginForm.css';
-import loginPhoto from './loginPhoto.jpg';
+import Typography from '@mui/material/Typography';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -35,65 +35,27 @@ function LoginForm() {
   }; // end login
 
   return (
-    <Box 
-      sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      '& > :not(style)': {
-        m: 10,
-        width: '70vw',
-        height: '70vh',
-      },
-    }}
-    >
-      <Paper elevation={3} >
-        <div className='loginBox'>
-          <Box
-            className='loginPhoto'
-            sx={{
-              '& > :not(style)': { 
-                width: '45vw',
-                height: '70vh',
-              },
-          }}
-          >
-            <img src={loginPhoto} alt="boy with map"></img>
-          </Box>
-          <Box
-          className='loginForm'
-          sx={{
-            '& > :not(style)': {
-              
-              width: '25  vw',
-              height: '70vh',
-            },
-            
-          }}
-          noValidate
-          autoComplete="off"
-          >
-          <form className="loginForm" onSubmit={login}>
-              <InputLabel htmlFor="component-simple">Username</InputLabel>
-              <Input 
-                value={username}
-                onChange={e => setUsername(e.target.value)} 
-              />
-              <InputLabel htmlFor="component-simple">Password</InputLabel>
-              <Input 
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)} 
-              />
-              <Button variant="contained" type="submit">Login</Button>
-              <p>Don't Have An Account? 
-                <Link to='/registration'> Register Here</Link>
-              </p>
-          </form>
-          </Box>
-        </div>
-      </Paper> 
-    </Box>
+          <div className='actualForm'>
+            <form className="loginForm" onSubmit={login}>
+                <TextField
+                  sx={{width: 300, backgroundColor: 'white', borderRadius: 2 }}
+                  label='Username'
+                  type='text'
+                  value={username}
+                  onChange={e => setUsername(e.target.value)} 
+                />
+                <TextField
+                  label='Password'
+                  sx={{ mt: 3, mb: 2, width: 300, backgroundColor: 'white', borderRadius: 2 }}
+                  type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)} 
+                />
+                <Fab 
+                  sx={{width: 250 }}
+                  variant="extended" type="submit">Login</Fab>
+            </form>
+          </div>
   );
 }
 

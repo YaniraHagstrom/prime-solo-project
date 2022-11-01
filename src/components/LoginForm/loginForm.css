@@ -1,15 +1,16 @@
-.loginBox {
+.formLayout {
     display: flex;
-    flex-wrap: wrap;
+    width: 30vw;
 }
 
 .loginForm {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    
+    align-items: center;
+    /* width: ; */
 }
 
-input {
-    width: 75px;
+.actualForm {
+    /* background-color: white; */
 }
+

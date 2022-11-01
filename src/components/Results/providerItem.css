@@ -1,4 +1,137 @@
-.resultsList {
+.results, .favorites {
+    /* margin-top: 50px; */
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 70vw;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* background-color: rgb(245, 162, 53, .6); */
 }
+
+.providerCard {
+    display: flex;
+    /* justify-content: center; */
+    width: 55vw;
+    height: 200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 5px;
+    align-items: stretch;
+}
+
+.providerAvatar {
+}
+
+.icons {
+    display: flex;
+    width: 60px;
+    align-self: right;
+}
+
+.icon {
+    display: flex;
+    /* align-self: center; */
+    justify-content: center;
+    align-content: center;
+    align-items: right;
+    /* flex-grow: 3; */
+}
+
+.location {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+.email {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+.languages {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+.services {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-top: 5px;
+    /* height: 24px; */
+}
+
+.dot {
+    font-size: 13px;
+    margin-left: 5px;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
+
+
+.providerText {
+    align-items: flex-start;
+    width: 300px;
+}
+
+
+/* Child Profile Div */
+
+.page {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    
+}
+
+.childAvatar {
+    margin-top: 25px;
+
+}
+
+.childProfile {
+    display: inline-flex;
+    flex-direction: column;
+    /* align-content: center; */
+    align-items: center;
+    width: 25vw;
+    -webkit-appearance: button;
+    border-right: 5px rgb(59, 189, 59) dotted;
+}
+
+/* .icon {
+    flex-direction: column;
+    flex-grow: 5;
+} */
+
+.notes {
+    height: 145px;
+    width: 196px;
+    -webkit-appearance: button;
+    border: 3px rgb(228, 110, 50, .7) dotted;
+    border-radius: 5px;
+    margin-left: 80px;
+    /* margin-right: 8px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.icon2 {
+    /* margin-left: 0px; */
+    display: flex;
+    flex-grow: 1;
+    justify-content: right;
+    align-content: right;
+    margin-right: 10px;
+}
+
+

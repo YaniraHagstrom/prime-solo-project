@@ -1,13 +1,30 @@
 import { useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import ProviderItem from "./ProviderItem";
+import './providerItem.css';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import { Fab } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+// import avatar1 from './avatar1.jpg'
 
 export default function Results(){
+    const history = useHistory();
     const dispatch = useDispatch();
+    const user = useSelector(store=> store.user);
+    useEffect(()=>{
+        dispatch({
+            type:'SAGA_GET_CITIES',
+            payload: user.country_id
+            })
+    })
     
     const providerResults = useSelector(store=> store.results);
 
     const childServices = useSelector(store=> store.childReducer)
+
+    const child = useSelector(store=> store.childReducer);
 
     const matches = [];
     
@@ -17,12 +34,33 @@ export default function Results(){
             matches.push(provider);
         }
     }
-    console.log(matches);
+
+    // console.log(matches);
+    const avatars = (1,2,3,4,5,6)
+
     return (
-        <div>
-            {matches.map(provider=> (
-                <ProviderItem key={provider.id} provider={provider}/>
-            ))}    
+        <div className="page">
+            <div className='childProfile'>
+                <Avatar className='childAvatar'
+                    src={require('./childAvatar.jpg')}
+                    sx={{ border: 2 ,width: 125, height: 125 }}
+                    ></Avatar>
+                <Typography sx={{textAlign: 'center', mt: 2, mb: 1, fontWeight:'bold'}} component="div" variant="h4">
+                {child.name}
+                </Typography>
+                <Fab className='searchButton'  size="small" variant='extended'color="secondary" aria-label="add"  onClick={()=>{history.push(`/favorites/${child.id}`)}}> 
+                    <FavoriteIcon/>
+                    Favorites
+                </Fab>
+            </div>
+            <div className="results">
+                <Typography sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4 }} component="div" variant="h5">
+                Matching Providers
+                </Typography>
+                {matches.map(provider=> (
+                    <ProviderItem key={provider.id} provider={provider}/>
+                ))}    
+            </div>
         </div>
     )
 }

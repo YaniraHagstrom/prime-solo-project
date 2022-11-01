@@ -34,6 +34,8 @@ router.get('/:childID', (req, res) => {
     SELECT * FROM providers
         INNER JOIN favorites    
                 ON providers.id = favorites.provider_id
+        INNER JOIN providers_services
+                ON providers.id = providers_services.provider_id
         WHERE favorites.child_id = $1;
     `
 

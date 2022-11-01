@@ -19,7 +19,7 @@ import ChildForm from '../ChildForm/ChildForm';
 import Results from '../Results/Results';
 import CreateProfile from '../UserPage/CreateProfile'
 import ChildEditForm from '../ChildForm/ChildEditForm';
-import Favorites from '../Results/Favorites/Favorites';
+import Favorites from '../Results/Favorites';
 
 import './App.css';
 
@@ -37,7 +37,7 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}
+        <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />

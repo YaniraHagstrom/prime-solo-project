@@ -1,0 +1,26 @@
+.left {
+    display: flex;
+    width: 30vw;
+    flex-direction: column;
+    /* padding-left: 50px; */
+}
+
+.challenge {
+    width: 30vw;
+}
+
+.about {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    width: 100vw;
+    justify-content: center;
+}
+
+.right {
+    width: 30vw;
+}
+
+li {
+    margin-top: 20px;
+}
