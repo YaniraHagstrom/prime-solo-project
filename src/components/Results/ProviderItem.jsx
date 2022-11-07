@@ -126,7 +126,7 @@ export default function ProviderItem({provider, favored, childID}){
                         <div className='icon'>
                             { edit ? 
                             <TextField
-                            sx={{ display: 'flex',width: 210, ml: 4, mr:1}}
+                            sx={{ display: 'flex',width: 210, ml: 8, mr:1}}
                             id="outlined-multiline-static"
                             label="notes"
                             multiline

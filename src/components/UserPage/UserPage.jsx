@@ -40,7 +40,7 @@ function UserPage() {
   return (
 
       <div>
-        { !user.city_id ? 
+        { !user.city_id ? // new user? then select country and city.
           <CreateProfile/>
           :
           <div className="page">
@@ -58,7 +58,7 @@ function UserPage() {
                 </Typography>
             </div>
             <div>
-              { children ?
+              { children.length < 1 ?
                 <div className='noChildren'>
                     {/* <img className='childHead' src={childImage}/> */}
                     <Typography sx={{textAlign: 'center'}} component="div" variant="h6">

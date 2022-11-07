@@ -10,7 +10,6 @@ import './childForm.css';
 import { InputLabel, FormControl, Select, MenuItem, Checkbox, FormGroup, FormControlLabel, Box, Paper, TextField, Button } from "@mui/material";
 
 
-
 export default function ChildEditForm(){
     const dispatch = useDispatch();
     const history = useHistory();

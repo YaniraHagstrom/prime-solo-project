@@ -47,32 +47,32 @@ router.post('/', (req, res)=> {
         })
 })
 
-// This GET if for individual child data for editing the form.
-// router.get('/:childID', (req, res)=> {
-//     const childID = req.params.childID;
-//     const sqlQuery = 
-//     `
-//     SELECT * FROM children 
-// 	INNER JOIN (
-// 	SELECT *
-// 	FROM   crosstab(
-//         'SELECT child_id, service_id, checked
-//         FROM   children_services'
-//         ) AS checked (child_id INT, "1" BOOLEAN, "2" BOOLEAN, "3" BOOLEAN, "4" BOOLEAN, "5" BOOLEAN, "6" BOOLEAN, "7" BOOLEAN, "8" BOOLEAN, "9" BOOLEAN, "10" BOOLEAN)
-//         ) AS foo
-//         ON children.id = foo.child_id
-//         WHERE children.id = $1;
-//     `
-//     const sqlValues=[childID]
-//     pool.query(sqlQuery, sqlValues)
-//         .then(dbRes => {
-//             res.send(dbRes.rows);
-//         })
-//         .catch(dbErr=> {
-//             res.sendStatus(500)
-//             console.log('Error in GET /child/:childID', dbErr);
-//         })
-// })
+// This GET is for individual child data for editing the form.
+router.get('/:childID', (req, res)=> {
+    const childID = req.params.childID;
+    const sqlQuery = 
+    `
+    SELECT * FROM children 
+	INNER JOIN (
+	SELECT *
+	FROM   crosstab(
+        'SELECT child_id, service_id, checked
+        FROM   children_services'
+        ) AS checked (child_id INT, "1" BOOLEAN, "2" BOOLEAN, "3" BOOLEAN, "4" BOOLEAN, "5" BOOLEAN, "6" BOOLEAN, "7" BOOLEAN, "8" BOOLEAN, "9" BOOLEAN, "10" BOOLEAN)
+        ) AS foo
+        ON children.id = foo.child_id
+        WHERE children.id = $1;
+    `
+    const sqlValues=[childID]
+    pool.query(sqlQuery, sqlValues)
+        .then(dbRes => {
+            res.send(dbRes.rows);
+        })
+        .catch(dbErr=> {
+            res.sendStatus(500)
+            console.log('Error in GET /child/:childID', dbErr);
+        })
+})
 
 
 // PUT for ChildEditForm:

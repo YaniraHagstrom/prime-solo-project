@@ -40,11 +40,13 @@ function Nav() {
               src={icon}
               sx={{ width: 75, height: 75}} /> */}
           { cities ?
-          <Avatar 
-            alt="Dragonfly" 
-            src={avatar}
-            sx={{ width: 40, height: 40, mr: 2}} 
-          />
+            <Link to='/home'>
+              <Avatar 
+                alt="Dragonfly" 
+                src={avatar}
+                sx={{ width: 40, height: 40, mr: 2}} 
+              />
+            </Link>
           : null
         }
         </>

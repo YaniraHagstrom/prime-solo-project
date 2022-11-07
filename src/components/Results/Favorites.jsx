@@ -27,10 +27,10 @@ export default function Favorites(){
         dispatch({
             type: 'SAGA_FETCH_SERVICES'
         })
-        // dispatch({
-        //     type: 'SAGA_FETCH_CHILD',
-        //     payload: params.id
-        // })
+        dispatch({
+            type: 'SAGA_FETCH_CHILD',
+            payload: params.id
+        })
     },[])
 
     const favorites = useSelector(store=> store.favorites);
